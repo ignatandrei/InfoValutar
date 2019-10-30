@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InfoValutarDOS
+namespace InfoValutarShared
 {
-    class ExchangeRates
+    public class ExchangeRates
     {
+        public string Bank { get; set; }
         public DateTime date { get; set; }
         public string ExchangeFrom { get; set; }
         public string ExchangeTo { get; set; }

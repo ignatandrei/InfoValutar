@@ -3,6 +3,14 @@ name: .NET Core
 on: [push]
 
 jobs:
+  generateTOC:
+    name: TOC Generator
+    runs-on: ubuntu-latest
+    steps:
+      - name: TOC Generator
+        uses: technote-space/toc-generator@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
   build:
 
     runs-on: ubuntu-latest
@@ -19,3 +27,4 @@ jobs:
       run: dotnet publish InfoValutar/InfoValutarDOS/InfoValutarDOS.csproj -r win10-x64 -p:PublishSingleFile=true --self-contained 
     - name: run tests
       run: dotnet test --filter "External=0" InfoValutar/InfovalutarTest/InfovalutarTest.csproj 
+

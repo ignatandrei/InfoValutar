@@ -28,7 +28,7 @@ namespace InfovalutarTest
         [Trait("External", "0")]
         public async Task TestParsing()
         {
-            var response = await File.ReadAllTextAsync(Path.Combine("data", "20191020bnr.txt"));
+            var response = await File.ReadAllTextAsync(Path.Combine("Data", "20191020bnr.txt"));
             var m = new MockHttpMessageHandler();
             m.When("https://www.bnr.ro/nbrfxrates.xml")
                 .Respond("application/text", response);

@@ -10,6 +10,7 @@ namespace InfovalutarTest
     public class TestNBR
     {
         [Fact]
+        [Trait("External","1")]
         public async Task TestLive()
         {
             var nbr = new GetNBRExchange();
@@ -24,6 +25,7 @@ namespace InfovalutarTest
             Assert.True(false, "Should find EUR");
         }
         [Fact]
+        [Trait("External", "0")]
         public async Task TestParsing()
         {
             var response = await File.ReadAllTextAsync(Path.Combine("data", "20191020bnr.txt"));

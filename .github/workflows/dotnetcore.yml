@@ -17,3 +17,5 @@ jobs:
 #      run: dotnet build --configuration Release InfoValutar\InfoValutarDOS\InfoValutarDOS.csproj
 #      run: dotnet publish  -r win10-x64 -p:PublishSingleFile=true --self-contained InfoValutar\InfoValutarDOS\InfoValutarDOS.csproj
       run: dotnet publish InfoValutar/InfoValutarDOS/InfoValutarDOS.csproj -r win10-x64 -p:PublishSingleFile=true --self-contained 
+    - name: run tests
+      run: dotnet test --filter "External=0" InfoValutar/InfovalutarTest/InfovalutarTest.csproj 

@@ -26,9 +26,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
         TARGET_PATHS: 'README.md'
     - name: Upload exe win10x64 that show exchange rates 
-        uses: actions/upload-artifact@v1
-        with:
-          name: win10x64
-          path: win10x64
+      uses: actions/upload-artifact@v1
+      with:
+        name: win10x64
+        path: win10x64
       
 

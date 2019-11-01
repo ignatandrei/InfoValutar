@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ namespace InfoValutarShared
         }
         public async IAsyncEnumerable<ExchangeRates> GetActualRates()
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
             var xml = await httpClient.GetStringAsync("https://www.bnr.ro/nbrfxrates.xml");
             //Console.WriteLine($"{xml}");
             var serializer = new XmlSerializer(typeof(DataSet));

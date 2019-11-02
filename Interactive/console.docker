@@ -1,0 +1,8 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0
+RUN dotnet tool install -g --add-source "https://dotnet.myget.org/F/dotnet-try/api/v3/index.json" dotnet-try
+ENV PATH="$PATH:/root/.dotnet/tools"
+#ENV ASPNETCORE_URLS=http://+:5000
+CMD dotnet try --verbose --port 5000 
+EXPOSE 5000
+#docker build -f ./console.docker . -t drop
+#docker run --rm -it -p 5000:5000/tcp drop:latest

@@ -20,6 +20,12 @@ namespace InfoValutarDOS
                 Console.WriteLine($"1 {e.ExchangeFrom} = {e.ExchangeValue} {e.ExchangeTo}");
             }
 
+            var ecb = new GetECBExchange();
+            list = ecb.GetActualRates();
+            await foreach (var e in list)
+            {
+                Console.WriteLine($"1 {e.ExchangeFrom} = {e.ExchangeValue} {e.ExchangeTo}");
+            }
         }
 
 

@@ -13,15 +13,13 @@ namespace InfoValutarDOS
     {
         static async Task Main(string[] args)
         {
-            var nbr = new GetNBRExchange();
-            var list = nbr.GetActualRates();
-            await foreach (var e in list)
-            {
-                Console.WriteLine($"1 {e.ExchangeFrom} = {e.ExchangeValue} {e.ExchangeTo}");
-            }
-
-            var ecb = new GetECBExchange();
-            list = ecb.GetActualRates();
+            
+            await ShowValues(new GetNBRExchange());
+            await ShowValues(new GetECBExchange());
+        }
+        public static async Task ShowValues(BankGetExchange bank)
+        {
+            var list = bank.GetActualRates();
             await foreach (var e in list)
             {
                 Console.WriteLine($"1 {e.ExchangeFrom} = {e.ExchangeValue} {e.ExchangeTo}");

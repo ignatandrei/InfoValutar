@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace InfoValutarShared
 {
-    public class GetECBExchange
+    public class GetECBExchange: BankGetExchange
     {
         private readonly HttpClient httpClient;
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InfoValutarShared;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,13 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace InfoValutarShared
+namespace InfoValutarECB
 {
     public class GetECBExchange: BankGetExchange
     {
         private readonly HttpClient httpClient;
+        public GetECBExchange() : this(null)
+        {
 
-        public GetECBExchange(HttpMessageHandler handler = null)
+        }
+        public GetECBExchange(HttpMessageHandler handler)
         {
             if (handler != null)
                 httpClient = new HttpClient(handler, disposeHandler: false);

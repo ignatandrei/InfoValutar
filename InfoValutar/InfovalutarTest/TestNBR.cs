@@ -1,3 +1,4 @@
+using InfoValutarNBR;
 using InfoValutarShared;
 using RichardSzalay.MockHttp;
 using System;

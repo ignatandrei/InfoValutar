@@ -1,4 +1,5 @@
-﻿using InfoValutarShared;
+﻿using InfoValutarLoadingLibs;
+using InfoValutarShared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,16 +12,37 @@ namespace InfoValutarDOS
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
+            var loader = new LoadExchangeProviders("plugins");
+            var exchange = loader.LoadExchange().ToArray();
+            Console.WriteLine($"plugin number: {exchange.Length}");
+            var l = new List<Task<ExchangeRates[]>>();
+            for (int i = 0; i < exchange.Length; i++)
+            {
+                l.Add(Rates(exchange[i]));
+            }
             
-            await ShowValues(new GetNBRExchange());
-            await ShowValues(new GetECBExchange());
+            
+            while (l.Count > 0)
+            {
+                var x = l.ToArray();
+
+                var data = await Task.WhenAny(x);
+                ShowValues(await data);
+                l.Remove(data);
+            }
         }
-        public static async Task ShowValues(BankGetExchange bank)
+        public static async Task<ExchangeRates[]> Rates(BankGetExchange bank)
         {
             var list = bank.GetActualRates();
-            await foreach (var e in list)
+            return await list.ToArrayAsync();
+            
+                        
+        }
+        public static void ShowValues(ExchangeRates[] list)
+        {
+            foreach (var e in list)
             {
                 Console.WriteLine($"1 {e.ExchangeFrom} = {e.ExchangeValue} {e.ExchangeTo}");
             }

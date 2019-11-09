@@ -25,6 +25,9 @@ namespace InfoValutarECB
             else
                 httpClient = new HttpClient();
         }
+
+        public string Bank => "ECB";
+
         public async IAsyncEnumerable<ExchangeRates> GetActualRates()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -42,12 +45,14 @@ namespace InfoValutarECB
             string orig = "ECB";
             foreach (var item in val.Cube)
             {
-                var exch = new ExchangeRates();
-                exch.Bank = orig;
-                exch.date = date;
-                exch.ExchangeFrom = "EUR";
-                exch.ExchangeTo = item.currency;
-                exch.ExchangeValue = item.rate;
+                var exch = new ExchangeRates
+                {
+                    Bank = orig,
+                    Date = date,
+                    ExchangeFrom = "EUR",
+                    ExchangeTo = item.currency,
+                    ExchangeValue = item.rate
+                };
                 yield return exch;
             }
 

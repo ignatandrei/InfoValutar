@@ -25,6 +25,9 @@ namespace InfoValutarNBR
             else
                 httpClient = new HttpClient();
         }
+
+        public string Bank => "BNR";
+
         public async IAsyncEnumerable<ExchangeRates> GetActualRates()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -42,15 +45,17 @@ namespace InfoValutarNBR
             string orig = "BNR";
             foreach (var item in val.Rate)
             {
-                var exch = new ExchangeRates();
-                exch.Bank = orig;
-                exch.date = date;
-                exch.ExchangeTo = "RON";
-                exch.ExchangeFrom = item.currency;
-                exch.ExchangeValue = item.Value;
+                var exch = new ExchangeRates
+                {
+                    Bank = orig,
+                    Date = date,
+                    ExchangeTo = "RON",
+                    ExchangeFrom = item.currency,
+                    ExchangeValue = item.Value
+                };
                 if (!string.IsNullOrWhiteSpace(item.multiplier))
                 {
-                    exch.ExchangeValue = exch.ExchangeValue / (decimal)int.Parse(item.multiplier);
+                    exch.ExchangeValue /= (decimal)int.Parse(item.multiplier);
                 }
                 yield return exch;
             }

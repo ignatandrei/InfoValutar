@@ -23,29 +23,31 @@ namespace InfoValutarDOS
             {
                 l.Add(Rates(exchange[i]));
             }
-            
-            
+
+            var all = new List<ExchangeRates>();
             while (l.Count > 0)
             {
                 var x = l.ToArray();
 
                 var data = await Task.WhenAny(x);
                 ShowValues(await data);
+                all.AddRange(await data);
                 l.Remove(data);
             }
 
-
-            //DisplayGui();
+            // in case of dotnet try, comment this line
+            DisplayGui(all.ToArray());
 
 
         }
-        static void DisplayGui()
+        static void DisplayGui(ExchangeRates[] exch)
         {
+            var banks = exch.Select(it => it.Bank).Distinct().ToArray();
             Application.Init();
             var top = Application.Top;
 
             // Creates the top-level window to show
-            var win = new Window("Exchange rates")
+            var win = new Window("Exchange rates( press enter)")
             {
                 X = 0,
                 Y = 1, // Leave one row for the toplevel menu
@@ -54,11 +56,25 @@ namespace InfoValutarDOS
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
+            
             top.Add(win);
-            var b = new Button(3,3,"BNR");
-            b.Clicked = () => { MessageBox.Query(10, 10, "A", "B"); };
-            win.Add(b);
-            win.Add(new Button(3, 6, "ECB"));
+            for (int i = 0; i < banks.Length; i++)
+            {
+                var bank = banks[i];
+                var b = new Button(10*i, 3, bank);
+                b.Clicked = () =>  
+                    MessageBox.Query(10, 10, bank, 
+                        string.Join(
+                            '\n',
+                            exch
+                            .Where(it=>it.Bank == bank)
+                            .Select(e=> $"1 {e.ExchangeFrom} = {e.ExchangeValue} {e.ExchangeTo}")
+                            .ToArray()
+
+                        ) );
+                win.Add(b);
+
+            }
             // Creates a menubar, the item "New" has a help menu.
             //var menu = new MenuBar(new MenuBarItem[] {
             //new MenuBarItem ("_File", new MenuItem [] {

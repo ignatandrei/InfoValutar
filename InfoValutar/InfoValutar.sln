@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarNBR", "InfoValut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarECB", "InfoValutarECB\InfoValutarECB.csproj", "{4FB65E85-8E76-43D4-A401-61BE150513CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoValutarLoadingLibs", "InfoValutarLoadingLibs\InfoValutarLoadingLibs.csproj", "{6117C0D1-C4A1-456B-BAAF-DEF64E2700BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarLoadingLibs", "InfoValutarLoadingLibs\InfoValutarLoadingLibs.csproj", "{6117C0D1-C4A1-456B-BAAF-DEF64E2700BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoValutarWebAPI", "InfoValutarWebAPI\InfoValutarWebAPI.csproj", "{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{6117C0D1-C4A1-456B-BAAF-DEF64E2700BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6117C0D1-C4A1-456B-BAAF-DEF64E2700BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6117C0D1-C4A1-456B-BAAF-DEF64E2700BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

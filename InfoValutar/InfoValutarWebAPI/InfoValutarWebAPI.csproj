@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InfoValutarLoadingLibs\InfoValutarLoadingLibs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="plugins\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\InfoValutarDOS\plugins\readme.md" Link="plugins\readme.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

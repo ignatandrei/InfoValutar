@@ -61,17 +61,19 @@ namespace InfoValutarDOS
             for (int i = 0; i < banks.Length; i++)
             {
                 var bank = banks[i];
-                var b = new Button(10*i, 3, bank);
-                b.Clicked = () =>  
-                    MessageBox.Query(10, 10, bank, 
-                        string.Join(
-                            '\n',
-                            exch
-                            .Where(it=>it.Bank == bank)
-                            .Select(e=> $"1 {e.ExchangeFrom} = {e.ExchangeValue} {e.ExchangeTo}")
-                            .ToArray()
+                var b = new Button(10 * i, 3, bank)
+                {
+                    Clicked = () =>
+                        MessageBox.Query(10, 10, bank,
+                            string.Join(
+                                '\n',
+                                exch
+                                .Where(it => it.Bank == bank)
+                                .Select(e => $"1 {e.ExchangeFrom} = {e.ExchangeValue} {e.ExchangeTo}")
+                                .ToArray()
 
-                        ) );
+                            ))
+                };
                 win.Add(b);
 
             }

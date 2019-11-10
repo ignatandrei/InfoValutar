@@ -15,6 +15,35 @@ namespace InfoValutarLoadingLibs
         {
             this.folder = folder;
         }
+        public async IAsyncEnumerable<ExchangeRates> Rates(string bank)
+        {
+            var provBank = LoadExchange()
+                .FirstOrDefault(it => string.Equals(bank, it.Bank, StringComparison.InvariantCultureIgnoreCase));
+
+            switch (provBank)
+            {
+                case null:
+                    throw new ArgumentOutOfRangeException(nameof(bank),$"cannot find {bank}");
+                    
+                default:
+                    {
+                        await foreach (var data in provBank.GetActualRates())
+                        {
+                            yield return data;
+                        }
+
+                        break;
+                    }
+            }
+
+        }
+        public IEnumerable<string> Banks()
+        {
+            return
+                LoadExchange()
+                .Select(it => it.Bank)
+                .ToArray();
+        }
         public IEnumerable<BankGetExchange> LoadExchange()
         {
             var loaders = new List<PluginLoader>();

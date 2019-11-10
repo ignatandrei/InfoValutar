@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InfoValutarLoadingLibs;
+using InfoValutarShared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -24,10 +25,13 @@ namespace InfoValutarWebAPI.Controllers
         [HttpGet]
         public IEnumerable<string> Banks()
         {
-            return _prov
-                .LoadExchange()
-                .Select(it=>it.Bank)
-                .ToArray();
+            return _prov.Banks();
+        }
+        [HttpGet]
+        public IAsyncEnumerable<ExchangeRates> Rates(string bank)
+        {
+            return _prov.Rates(bank);
+           
         }
     }
 }

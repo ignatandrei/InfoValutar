@@ -27,8 +27,8 @@ namespace InfoValutarWebAPI.Controllers
         {
             return _prov.Banks();
         }
-        [HttpGet]
-        public IAsyncEnumerable<ExchangeRates> Rates(string bank)
+        [HttpGet("{bank}")]
+        public IAsyncEnumerable<ExchangeRates> Rates([FromRoute] string bank)
         {
             return _prov.Rates(bank);
            

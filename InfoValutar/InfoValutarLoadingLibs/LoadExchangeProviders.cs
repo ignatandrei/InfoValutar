@@ -17,6 +17,8 @@ namespace InfoValutarLoadingLibs
         }
         public async IAsyncEnumerable<ExchangeRates> Rates(string bank)
         {
+            if(string.IsNullOrWhiteSpace(bank))
+                throw new ArgumentNullException($"{nameof(bank)} cannot be empty");
             var provBank = LoadExchange()
                 .FirstOrDefault(it => string.Equals(bank, it.Bank, StringComparison.InvariantCultureIgnoreCase));
 

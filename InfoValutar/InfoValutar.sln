@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarWebAPI", "InfoVa
 		{4FB65E85-8E76-43D4-A401-61BE150513CC} = {4FB65E85-8E76-43D4-A401-61BE150513CC}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoValutarPluginStarter", "InfoValutarPluginStarter\InfoValutarPluginStarter.csproj", "{E25A5C92-998A-4D6D-9C69-2A7D78B24EFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E25A5C92-998A-4D6D-9C69-2A7D78B24EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E25A5C92-998A-4D6D-9C69-2A7D78B24EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E25A5C92-998A-4D6D-9C69-2A7D78B24EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E25A5C92-998A-4D6D-9C69-2A7D78B24EFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

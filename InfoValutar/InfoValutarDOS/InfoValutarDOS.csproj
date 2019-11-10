@@ -32,4 +32,8 @@
     <ProjectReference Include="..\InfoValutarShared\InfoValutarShared.csproj" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="xcopy &quot;$(SolutionDir)plugins\*.*&quot; &quot;$(TargetDir)plugins&quot; /E /F /I /Y /R" />
+  </Target>
+
 </Project>

@@ -8,4 +8,8 @@
     <ProjectReference Include="..\InfoValutarShared\InfoValutarShared.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)plugins\$(ProjectName)&quot; /E /F /I /Y /R" />
+  </Target>
+
 </Project>

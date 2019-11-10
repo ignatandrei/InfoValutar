@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarDOS", "InfoValutarDOS\InfoValutarDOS.csproj", "{5970AD2A-6D01-434C-9F3D-69A32C9E9F47}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B7F9147E-3044-40E1-95F5-156928DE54FD} = {B7F9147E-3044-40E1-95F5-156928DE54FD}
+		{4FB65E85-8E76-43D4-A401-61BE150513CC} = {4FB65E85-8E76-43D4-A401-61BE150513CC}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarShared", "InfoValutarShared\InfoValutarShared.csproj", "{9614EE27-D460-40C9-B4B4-8104E7FB1288}"
 EndProject
@@ -15,7 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarECB", "InfoValut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarLoadingLibs", "InfoValutarLoadingLibs\InfoValutarLoadingLibs.csproj", "{6117C0D1-C4A1-456B-BAAF-DEF64E2700BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoValutarWebAPI", "InfoValutarWebAPI\InfoValutarWebAPI.csproj", "{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarWebAPI", "InfoValutarWebAPI\InfoValutarWebAPI.csproj", "{5C14B0D5-F53C-49D1-A09F-7BE048CB7664}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B7F9147E-3044-40E1-95F5-156928DE54FD} = {B7F9147E-3044-40E1-95F5-156928DE54FD}
+		{4FB65E85-8E76-43D4-A401-61BE150513CC} = {4FB65E85-8E76-43D4-A401-61BE150513CC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

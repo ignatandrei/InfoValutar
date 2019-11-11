@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="xcopy &quot;$(SolutionDir)plugins\*.*&quot; &quot;$(TargetDir)plugins&quot; /E /F /I /Y /R" />
+    <Exec Command="echo $(RepoRoot)&#xD;&#xA;xcopy &quot;$(RepoRoot)plugins\*.*&quot; &quot;$(TargetDir)plugins&quot; /E /F /I /Y /R" />
   </Target>
 
 </Project>

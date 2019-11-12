@@ -15,6 +15,9 @@ jobs:
       with:
         dotnet-version: 3.0.100
     - name: Build with dotnet
+      run: dotnet build --configuration Release InfoValutar/InfoValutar.sln 
+    
+    - name: Publish with dotnet
 #      run: dotnet build --configuration Release InfoValutar\InfoValutarDOS\InfoValutarDOS.csproj
 #      run: dotnet publish  -r win10-x64 -p:PublishSingleFile=true --self-contained InfoValutar\InfoValutarDOS\InfoValutarDOS.csproj
       run: dotnet publish InfoValutar/InfoValutarDOS/InfoValutarDOS.csproj -r win10-x64 -p:PublishSingleFile=true --self-contained -o win10x64

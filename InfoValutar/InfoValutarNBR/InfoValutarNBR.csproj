@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="echo $(RepoRoot)&#xD;&#xA;xcopy &quot;$(RepoRoot)plugins\*.*&quot; &quot;$(TargetDir)plugins&quot; /E /F /I /Y /R&#xD;&#xA;rem xcopy &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)plugins\$(ProjectName)&quot; /E /F /I /Y /R" />
+    <Exec Command="xcopy &quot;$(RepoRoot)plugins\*.*&quot; &quot;$(TargetDir)plugins&quot; /E /F /I /Y /R&#xD;&#xA;&#xD;&#xA;rem xcopy &quot;$(TargetDir)*.*&quot; &quot;$(SolutionDir)plugins\$(ProjectName)&quot; /E /F /I /Y /R" />
   </Target>
 
 </Project>

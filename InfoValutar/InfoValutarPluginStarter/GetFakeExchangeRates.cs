@@ -1,6 +1,7 @@
 ﻿using InfoValutarShared;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace InfoValutarPluginStarter
 {
@@ -10,6 +11,7 @@ namespace InfoValutarPluginStarter
 
         public async IAsyncEnumerable<ExchangeRates> GetActualRates()
         {
+            await Task.Delay(10);
             yield return new ExchangeRates()
             {
                 Bank = this.Bank,

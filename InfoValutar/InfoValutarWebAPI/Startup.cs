@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using InfoValutarLoadingLibs;
 using Microsoft.AspNetCore.Builder;
@@ -11,10 +12,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NSwag;
 
 namespace InfoValutarWebAPI
 {
-    public class Startup
+    class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -29,6 +31,27 @@ namespace InfoValutarWebAPI
             services.AddControllers();
             services.AddSingleton< LoadExchangeProviders>(new LoadExchangeProviders("plugins"));
             services.AddApiVersioning();
+            services.AddOpenApiDocument(c=> {
+                
+                
+                c.PostProcess = d =>
+                {
+                    d.Info.Title = "Infovalutar API";
+                    d.Info.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    d.Info.Description = "Source code / docs at https://github.com/ignatandrei/InfoValutar/";
+                    d.Info.Contact = new OpenApiContact
+                    {
+                        Name = "Andrei Ignat",
+                        Email = string.Empty,
+                        Url = "http://msprogrammer.serviciipeweb.ro/category/exchange-rates/"
+                    };
+                    d.Info.License = new OpenApiLicense()
+                    {
+                        Name = "Use under MIT",
+                        //Url = "https://example.com/license"
+                    };
+                };
+            });
         }
 
 
@@ -49,6 +72,8 @@ namespace InfoValutarWebAPI
             {
                 endpoints.MapControllers();
             });
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
         }
     }
 }

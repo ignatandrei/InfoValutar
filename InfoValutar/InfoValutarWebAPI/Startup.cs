@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using InfoValutarLoadingLibs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -57,6 +58,7 @@ namespace InfoValutarWebAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -74,6 +76,10 @@ namespace InfoValutarWebAPI
             });
             app.UseOpenApi();
             app.UseSwaggerUi3();
+
+            var sa = app.ServerFeatures.Get<IServerAddressesFeature>();
+            var urls =string.Join(",", sa.Addresses.Select(it => it + "swagger"));
+            Console.WriteLine("please use " + urls);
         }
     }
 }

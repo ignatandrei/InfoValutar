@@ -18,6 +18,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.0.0" />
+  </ItemGroup>
+
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="xcopy &quot;$(RepoRoot)plugins\*.*&quot; &quot;$(TargetDir)plugins&quot; /E /F /I /Y /R" />
   </Target>

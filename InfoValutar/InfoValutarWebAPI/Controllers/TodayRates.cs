@@ -10,7 +10,8 @@ using Microsoft.Extensions.Logging;
 namespace InfoValutarWebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [ApiVersion( "1.0" )]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
     public class TodayRates : ControllerBase
     {
         private readonly ILogger<TodayRates> _logger;

@@ -28,6 +28,7 @@ namespace InfoValutarWebAPI
         {
             services.AddControllers();
             services.AddSingleton< LoadExchangeProviders>(new LoadExchangeProviders("plugins"));
+            services.AddApiVersioning();
         }
 
 

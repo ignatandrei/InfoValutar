@@ -14,15 +14,16 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.100
-    - name: Build with dotnet
+    - name: Build with dotnet the solution
       run: dotnet build --configuration Release InfoValutar/InfoValutar.sln 
-    
-    - name: Publish with dotnet
+
+    - name: run tests 
+      run: dotnet test --filter "External=0" InfoValutar/InfoValutar.sln 
+
+    - name: Publish with dotnet the csproj
 #      run: dotnet build --configuration Release InfoValutar\InfoValutarDOS\InfoValutarDOS.csproj
 #      run: dotnet publish  -r win10-x64 -p:PublishSingleFile=true --self-contained InfoValutar\InfoValutarDOS\InfoValutarDOS.csproj
       run: dotnet publish InfoValutar/InfoValutarDOS/InfoValutarDOS.csproj -r win10-x64 -p:PublishSingleFile=true --self-contained -o win10x64
-    - name: run tests 
-      run: dotnet test --filter "External=0" InfoValutar/InfoValutar.sln 
     - name: TOC Generator
       uses: technote-space/toc-generator@v1
       with:

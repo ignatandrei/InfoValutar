@@ -15,7 +15,7 @@ jobs:
       with:
         dotnet-version: 3.0.100
     - name: Build with dotnet the solution
-      run: dotnet build --configuration Release InfoValutar/InfoValutar.sln 
+      run: dotnet build --configuration Release InfoValutar/InfoValutar.sln /m:1
 
     - name: run tests 
       run: dotnet test --filter "External=0" InfoValutar/InfoValutar.sln 

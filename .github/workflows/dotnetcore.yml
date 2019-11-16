@@ -24,11 +24,6 @@ jobs:
 #      run: dotnet build --configuration Release InfoValutar\InfoValutarDOS\InfoValutarDOS.csproj
 #      run: dotnet publish  -r win10-x64 -p:PublishSingleFile=true --self-contained InfoValutar\InfoValutarDOS\InfoValutarDOS.csproj
       run: dotnet publish InfoValutar/InfoValutarDOS/InfoValutarDOS.csproj -r win10-x64 -p:PublishSingleFile=true --self-contained -o win10x64
-    - name: TOC Generator
-      uses: technote-space/toc-generator@v1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-        TARGET_PATHS: 'README.md'
     - name: Upload exe win10x64 that show exchange rates 
       uses: actions/upload-artifact@v1
       with:

@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="xcopy &quot;$(RepoRoot)plugins\*.*&quot; &quot;$(TargetDir)plugins&quot; /E /F /I /Y /R" />
+    <Exec Command="pwsh -C {Copy-Item -Path &quot;$(RepoRoot)plugins\*.*&quot; -Destination &quot;$(TargetDir)plugins&quot; }" />
   </Target>
 
 </Project>

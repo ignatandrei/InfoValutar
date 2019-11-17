@@ -6,7 +6,7 @@ jobs:
 
   build:
 
-    runs-on: windows-latest #ubuntu-latest does not work for xcopy
+    runs-on: ubuntu-latest #windows-latestdoes not work for xcopy
 
     steps:
     - uses: actions/checkout@v1
@@ -14,6 +14,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.100
+
+    - name: Restore tools
+      run:  |
+            cd InfoValutar
+            dotnet tool restore
+    
     - name: Build with dotnet the solution
       run: dotnet build --configuration Release InfoValutar/InfoValutar.sln /m:1
 

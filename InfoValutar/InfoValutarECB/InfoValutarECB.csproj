@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="pwsh -C {Copy-Item -Path &quot;$(TargetDir)*.*&quot;  -Destination &quot;$(SolutionDir)plugins\$(ProjectName)&quot;}" />
+    <Exec Command="pwsh $(ProjectDir)postBuild.ps1 &quot;$(TargetDir)&quot;  &quot;$(SolutionDir)plugins\$(ProjectName)&quot;&#xD;&#xA;" />
   </Target>
 
 </Project>

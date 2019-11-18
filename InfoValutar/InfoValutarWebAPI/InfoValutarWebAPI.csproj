@@ -12,14 +12,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="plugins\" />
+    <Content Include="plugins\**\*.dll" CopyToOutputDirectory="Always"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\InfoValutarLoadingLibs\InfoValutarLoadingLibs.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    
-    <Content Update="plugins\**" CopyToOutputDirectory="PreserveNewest">
+    <!--<Content Update="plugins\**\*.dll" CopyToOutputDirectory="Always" LinkBase="plugins">
       
-    </Content>
+    </Content>-->
+    <!--<Content Update="$([System.IO.Directory]::GetFiles('$(ProjectDir)plugins', '*.*', SearchOption.AllDirectories))" CopyToOutputDirectory="PreserveNewest">-->
+      
+    <!--</Content>-->
   </ItemGroup>
 
   <ItemGroup>
@@ -30,5 +37,9 @@
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins&quot;  &quot;$(ProjectDir)&quot;" />
   </Target>
-
+  <!--<Target Name="ContentsBeforeBuild" AfterTargets="BeforeBuild">
+    <ItemGroup>
+      <Content Include="plugins\**" />
+    </ItemGroup>
+  </Target>-->
 </Project>

@@ -20,8 +20,8 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet build --configuration Release -r linux-x64 InfoValutar/InfoValutar.sln /m:1
 
-#RUN dotnet publish InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj --configuration Release --no-build -r linux-x64 -p:PublishSingleFile=true --self-contained -o linux-x64
-RUN dotnet publish InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj --configuration Release --no-build -r linux-x64 --self-contained -o linux-x64
+RUN dotnet publish InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj --configuration Release --no-build -r linux-x64 -p:PublishSingleFile=true --self-contained -o linux-x64
+#RUN dotnet publish InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj --configuration Release --no-build -r linux-x64 --self-contained -o linux-x64
 
 
 

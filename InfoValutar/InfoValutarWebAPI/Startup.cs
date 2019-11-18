@@ -78,7 +78,7 @@ namespace InfoValutarWebAPI
             app.UseSwaggerUi3();
 
             var sa = app.ServerFeatures.Get<IServerAddressesFeature>();
-            var urls =string.Join(",", sa.Addresses.Select(it => it + "swagger"));
+            var urls =string.Join(",", sa.Addresses.Select(it => it + "/swagger"));
             Console.WriteLine("please use " + urls);
         }
     }

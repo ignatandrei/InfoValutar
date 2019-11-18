@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>  
     <DocumentationFile>InfoValutarWebAPI.xml</DocumentationFile>
+    <RuntimeIdentifiers>win10-x64;linux-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,12 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="plugins\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="..\InfoValutarDOS\plugins\readme.md" Link="plugins\readme.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    
+    <Content Update="plugins\**" CopyToOutputDirectory="PreserveNewest">
+      
     </Content>
   </ItemGroup>
 
@@ -30,7 +28,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins\&quot;  &quot;$(TargetDir)&quot;" />
+    <Exec Command="pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins&quot;  &quot;$(ProjectDir)&quot;" />
   </Target>
 
 </Project>

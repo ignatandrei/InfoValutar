@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="pwsh $(ProjectDir)preBuild.ps1 &quot;&quot;$(RepoRoot)plugins\&quot;  &quot;$(TargetDir)&quot;" />
+    <Exec Command="pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins\&quot;  &quot;$(TargetDir)&quot;" />
   </Target>
 
 </Project>

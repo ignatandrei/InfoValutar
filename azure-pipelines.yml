@@ -38,3 +38,6 @@ steps:
 
 - script: |
         docker image ls
+        cd docker
+        docker build -f dockerForWebAPI.txt -t infovalutar ..
+  displayName: create docker

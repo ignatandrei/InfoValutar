@@ -329,3 +329,6 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+#Various files to not be included in source because are self generating
+InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.xml

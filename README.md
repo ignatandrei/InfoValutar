@@ -16,3 +16,8 @@ Docker :
 docker run --rm -d -p 8080:8080 ignatandrei/infovalutar:latest
 
 http://localhost:8080/swagger
+
+## Play directly with Docker
+
+https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ignatandrei/InfoValutar/master/PlayWithDocker/WebAPI.yml
+( press the Login/Start, then 8080 link )

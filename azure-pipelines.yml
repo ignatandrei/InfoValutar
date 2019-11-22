@@ -40,4 +40,7 @@ steps:
         docker image ls
         cd docker
         docker build -f dockerForWebAPI.txt -t infovalutar ..
+        echo $MY_PASSWORD_DOCKER| docker login --username ignatandrei --password-stdin
+        docker tag infovalutar ignatandrei/infovalutar
+        docker push ignatandrei/infovalutar
   displayName: create docker

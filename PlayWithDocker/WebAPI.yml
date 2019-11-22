@@ -1,0 +1,7 @@
+version: "3.0"
+
+services:
+  baobab_lims:
+    image: ignatandrei/infovalutar
+    ports:
+      - 80:80

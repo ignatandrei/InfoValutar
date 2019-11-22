@@ -5,42 +5,46 @@
 
 trigger:
 - master
+  name: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+jobs:
+- job: Build
+  pool:
+    vmImage: 'windows-latest'
+
+  variables:
+    solution: '**/*.sln'
+    buildPlatform: 'Any CPU'
+    buildConfiguration: 'Release'
 
 
-pool:
-  vmImage: 'windows-latest'
+  steps:
+   - task: NuGetToolInstaller@1
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  # - task: NuGetCommand@2
+  #   inputs:
+  #     restoreSolution: '$(solution)'
 
-name: $(TeamProject)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+  # - task: VSBuild@1
+  #   inputs:
+  #     solution: '$(solution)'
+  #     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+  #     platform: '$(buildPlatform)'
+  #     configuration: '$(buildConfiguration)'
 
-steps:
-- task: NuGetToolInstaller@1
+  # - task: VSTest@2
+  #   inputs:
+  #     platform: '$(buildPlatform)'
+  #     configuration: '$(buildConfiguration)'
+- job: Build Docker
+  pool:
+    vmImage: 'ubuntu-16.04'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- script: |
-        docker image ls
-        cd docker
-        docker build -f dockerForWebAPI.txt -t infovalutar ..
-        echo $MY_PASSWORD_DOCKER| docker login --username ignatandrei --password-stdin
-        docker tag infovalutar ignatandrei/infovalutar
-        docker push ignatandrei/infovalutar
-  displayName: create docker
+  - script: |
+          docker image ls
+          cd docker
+          docker build -f dockerForWebAPI.txt -t infovalutar ..
+          echo $MY_PASSWORD_DOCKER| docker login --username ignatandrei --password-stdin
+          docker tag infovalutar ignatandrei/infovalutar
+          docker push ignatandrei/infovalutar
+    displayName: create docker

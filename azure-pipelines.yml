@@ -39,6 +39,8 @@ jobs:
   #     platform: '$(buildPlatform)'
   #     configuration: '$(buildConfiguration)'
 - job: Build_Docker
+  dependsOn: 
+  - Build_With_Test
   pool:
     vmImage: 'ubuntu-16.04'
   

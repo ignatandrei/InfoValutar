@@ -20,4 +20,4 @@ http://localhost:8080/swagger
 ## Play directly with Docker
 
 https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ignatandrei/InfoValutar/master/PlayWithDocker/WebAPI.yml
-( press the Login/Start, then 8080 link )
+( press the Login/Start, then 8080 link . Close the session / Refresh the session page if not works  )

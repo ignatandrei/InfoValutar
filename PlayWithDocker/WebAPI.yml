@@ -3,5 +3,6 @@ version: "3.0"
 services:
   infovalutar:
     image: ignatandrei/infovalutar
+    restart: always
     ports:
       - 8080:8080

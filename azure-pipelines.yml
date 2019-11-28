@@ -43,6 +43,7 @@ jobs:
 - job: Build_Docker
   dependsOn: 
   - Build_With_Test
+  condition: and(succeeded(),false)
   pool:
     vmImage: 'ubuntu-16.04'
   
@@ -100,7 +101,7 @@ jobs:
         WebAppName: 'infovalutar'
         ResourceGroupName: 'infovalutarRG'
 
-  - task: AzureRmWebAppDeployment@3
+  - task: AzureRmWebAppDeployment@4
     inputs:
       azureSubscription: 'InfoValutarServiceConnection'
       WebAppName: 'infovalutar'

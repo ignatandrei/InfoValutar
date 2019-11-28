@@ -77,8 +77,8 @@ jobs:
 
   - script: |
       dotnet build --configuration $(buildConfiguration) -r linux-x64 InfoValutar/InfoValutar.sln /m:1
-      dotnet publish InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj --configuration Release --no-build -r linux-x64 -p:PublishSingleFile=true  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64
-      displayName: publish again  
+      dotnet publish InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj --configuration $(buildConfiguration) --no-build -r linux-x64 -p:PublishSingleFile=false  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64
+    displayName: publish again  
 
   - task: ArchiveFiles@2
     inputs:

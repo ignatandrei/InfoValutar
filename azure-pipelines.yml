@@ -24,7 +24,9 @@ jobs:
   - task: NuGetToolInstaller@1
   
   - script: |
+      cd InfoValutar
       dotnet tool restore
+    displayName: restore tools
       
   - task: NuGetCommand@2
     inputs:

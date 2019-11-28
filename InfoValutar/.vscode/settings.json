@@ -1,3 +1,6 @@
 {
-    "razor.disabled": true
+    "razor.disabled": true,
+    "dotnet-test-explorer.enableTelemetry": false,
+    "dotnet-test-explorer.testProjectPath":"**/*.sln",
+    "dotnet-test-explorer.autoExpandTree":true
 }

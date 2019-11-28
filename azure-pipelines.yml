@@ -22,7 +22,10 @@ jobs:
 
   steps:
   - task: NuGetToolInstaller@1
-
+  
+  - script: |
+      dotnet tool restore
+      
   - task: NuGetCommand@2
     inputs:
       restoreSolution: '$(solution)'
@@ -77,6 +80,7 @@ jobs:
       restoreSolution: '$(solution)'
 
   - script: |
+      dotnet tool restore
       dotnet build --configuration $(buildConfiguration) -r linux-x64 InfoValutar/InfoValutar.sln /m:1
       dotnet publish InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj --configuration $(buildConfiguration) --no-build -r linux-x64 -p:PublishSingleFile=false  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64
     displayName: publish again  

@@ -3,6 +3,8 @@ WORKDIR /app
 
 # Copy csproj and restore as distinct layers
 COPY InfoValutar/*.sln ./
+COPY InfoValutar/.config/ ./.config/ 
+
 #Docker has not recursive copy into folders
 COPY  InfoValutar/InfoValutarDOS/InfoValutarDOS.csproj ./InfoValutarDOS/InfoValutarDOS.csproj
 COPY  InfoValutar/InfoValutarShared/InfoValutarShared.csproj ./InfoValutarShared/InfoValutarShared.csproj
@@ -14,6 +16,7 @@ COPY  InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj ./InfoValutarWebAPI
 COPY  InfoValutar/InfoValutarPluginStarter/InfoValutarPluginStarter.csproj ./InfoValutarPluginStarter/InfoValutarPluginStarter.csproj
 
 #RUN ls -l ./app/InfoValutarDOS/
+RUN dotnet tool restore
 RUN dotnet restore
 
 # Copy everything else and build

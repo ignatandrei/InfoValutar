@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="pwsh $(ProjectDir)postBuild.ps1 &quot;$(TargetDir)&quot;  &quot;$(SolutionDir)plugins\$(ProjectName)&quot;" />
+    <Exec Command="dotnet pwsh $(ProjectDir)postBuild.ps1 &quot;$(TargetDir)&quot;  &quot;$(SolutionDir)plugins\$(ProjectName)&quot;" />
   </Target>
 
 </Project>

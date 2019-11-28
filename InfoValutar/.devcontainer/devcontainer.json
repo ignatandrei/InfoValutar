@@ -47,10 +47,12 @@
 
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
-		"ms-vscode.csharp"
+		"ms-vscode.csharp",
+		"hbenl.vscode-test-explorer",
+		"formulahendry.dotnet-test-explorer"
 	]
 	,
-	"postCreateCommand": "dotnet build",
+	"postCreateCommand": "dotnet tool restore && dotnet build",
 	"overrideCommand":true,
 	"shutdownAction": "stopContainer"
 }

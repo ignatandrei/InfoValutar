@@ -100,6 +100,7 @@ jobs:
         action: 'Stop Azure App Service'
         WebAppName: 'infovalutar'
         ResourceGroupName: 'infovalutarRG'
+    displayName: stop azure
 
   - task: AzureRmWebAppDeployment@4
     inputs:
@@ -107,7 +108,8 @@ jobs:
       WebAppName: 'infovalutar'
       Package: $(System.ArtifactsDirectory)/*InfoValLinuxX64*.zip
       ResourceGroupName: 'infovalutarRG'
-
+    displayName: deploy to azure
+    
   - task: AzureAppServiceManage@0
     inputs:
         azureSubscription: 'InfoValutarServiceConnection'
@@ -115,4 +117,4 @@ jobs:
         WebAppName: 'infovalutar'
         ResourceGroupName: 'infovalutarRG'
     condition: always() # always restart azure
-    
+    displayName: start azure    

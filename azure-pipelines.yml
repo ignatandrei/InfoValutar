@@ -55,3 +55,63 @@ jobs:
           docker tag infovalutar ignatandrei/infovalutar
           docker push ignatandrei/infovalutar
     displayName: create docker
+
+- job: DeployAzure
+  dependsOn: 
+  - Build_With_Test
+  pool:
+    vmImage: 'windows-latest'
+  
+  variables:
+    solution: '**/*.sln'
+    buildPlatform: 'Any CPU'
+    buildConfiguration: 'Release'
+
+
+  steps:
+  - task: NuGetToolInstaller@1
+
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '$(solution)'
+
+  - script: |
+      dotnet build --configuration $(buildConfiguration) -r linux-x64 InfoValutar/InfoValutar.sln /m:1
+      dotnet publish InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj --configuration Release --no-build -r linux-x64 -p:PublishSingleFile=true  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64
+      displayName: publish again  
+
+  - task: ArchiveFiles@2
+    inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/InfoValLinuxX64'
+        includeRootFolder: false
+        archiveType: 'zip' 
+        archiveFile: '$(Build.ArtifactStagingDirectory)/InfoValLinuxX64.zip' 
+        replaceExistingArchive: true 
+    displayName: 'arhive files'
+  
+  - script: |
+       dir $(System.ArtifactsDirectory)\*.zip /s /b
+    displayName: finding zip after Publish      
+   
+  - task: AzureAppServiceManage@0
+    inputs:
+        azureSubscription: 'InfoValutarServiceConnection'
+        action: 'Stop Azure App Service'
+        WebAppName: 'infovalutar'
+        ResourceGroupName: 'infovalutarRG'
+
+  - task: AzureRmWebAppDeployment@3
+    inputs:
+      azureSubscription: 'InfoValutarServiceConnection'
+      WebAppName: 'infovalutar'
+      Package: $(System.ArtifactsDirectory)/*InfoValLinuxX64*.zip
+      ResourceGroupName: 'infovalutarRG'
+
+  - task: AzureAppServiceManage@0
+    inputs:
+        azureSubscription: 'InfoValutarServiceConnection'
+        action: 'Start Azure App Service'
+        WebAppName: 'infovalutar'
+        ResourceGroupName: 'infovalutarRG'
+    condition: always() # always restart azure
+    

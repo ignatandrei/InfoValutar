@@ -12,11 +12,11 @@ using System.Linq;
 
 namespace InfovalutarTest
 {
-    public class TestSave
+    public class TestSaveAndRetrieve
     {
         [Fact]
         [Trait("External", "0")]
-        public async Task Save()
+        public async Task SaveAndRetrieve()
         {
             ISave s = new SaveSqlServer();
             var response = await File.ReadAllTextAsync(Path.Combine("Data", "20191020bnr.txt"));
@@ -28,6 +28,9 @@ namespace InfovalutarTest
             var data = await nbr.GetActualRates().ToArrayAsync();
             var nr= await s.Save(data);
             Assert.Equal(nr, data.Length);
+            var q = new RetrieveSqlServer();
+            var t = await q.Rates("BNR", DateTime.MinValue, DateTime.MaxValue);
+            Assert.Equal(nr, t.Length);
         }
     }
 }

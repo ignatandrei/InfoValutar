@@ -1,5 +1,4 @@
 ﻿using InfoValutarShared;
-using System;
 using System.Threading.Tasks;
 
 namespace InfovalutarDB

@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InfovalutarDB
 {
-    
     public class SaveSqlServer : ISave
     {
         public SaveSqlServer()
@@ -19,56 +18,61 @@ namespace InfovalutarDB
         }
         public async Task<int> Save(params ExchangeRates[] er)
         {
-            var data = er.Select(it => it.Bank.ToLower()).Distinct();
-            
-            var config = ConfigurationManager.ConnectionStrings["DB"];
-            var opt= new DbContextOptionsBuilder<InfoValutarContext>();
-            if (config == null)
+            var data = er.Select(it => it.Bank?.ToLower()).Distinct();
+
+            DbContextOptionsBuilder<InfoValutarContext> opt;
+            var ConnectionString = InMemoryDB.sing.GetConRead("DBRead");
+
+            if (string.IsNullOrWhiteSpace(ConnectionString ))
             {
-                opt.UseInMemoryDatabase("write");
+                opt = InMemoryDB.sing.MemoryOptions();
             }
             else
             {
-                opt.UseSqlServer(config.ConnectionString);
+                opt = new DbContextOptionsBuilder<InfoValutarContext>();
+                opt.UseSqlServer(ConnectionString);
             }
 
-            var cnt = new InfoValutarContext(opt.Options);
-            foreach (var item in data)
+            using (var cnt = new InfoValutarContext(opt.Options))
             {
-                var dataToSave = er
-                    .Where(it => it.Bank.ToLower() == item);
-                    
-
-                switch (item)
+                foreach (var item in data)
                 {
-                    case "ecb":
-                        cnt.Ecb.AddRange(
-                            dataToSave.Select(it =>
-                            new Ecb()
-                            {
-                                Date = it.Date,
-                                ExchangeFrom = it.ExchangeFrom,
-                                ExchangeTo = it.ExchangeTo,
-                                ExchangeValue = it.ExchangeValue
-                            }).ToArray());
-                            break;
-                    case "bnr":
-                        cnt.Nbr.AddRange(
-                            dataToSave.Select(it =>
-                            new Nbr()
-                            {
-                                Date = it.Date,
-                                ExchangeFrom = it.ExchangeFrom,
-                                ExchangeTo = it.ExchangeTo,
-                                ExchangeValue = it.ExchangeValue
-                            }).ToArray());
-                            break;
-                    default:
-                        throw new ArgumentException($"cannot save bank {item}");
-                }
+                    var dataToSave = er
+                        .Where(it => it.Bank?.ToLower() == item);
 
+
+                    switch (item)
+                    {
+                        case "ecb":
+                            cnt.Ecb.AddRange(
+                                dataToSave.Select(it =>
+                                new Ecb()
+                                {
+                                    Date = it.Date,
+                                    ExchangeFrom = it.ExchangeFrom,
+                                    ExchangeTo = it.ExchangeTo,
+                                    ExchangeValue = it.ExchangeValue
+                                }).ToArray());
+                            break;
+                        case "bnr":
+                            cnt.Nbr.AddRange(
+                                dataToSave.Select(it =>
+                                new Nbr()
+                                {
+                                    Date = it.Date,
+                                    ExchangeFrom = it.ExchangeFrom,
+                                    ExchangeTo = it.ExchangeTo,
+                                    ExchangeValue = it.ExchangeValue
+                                }).ToArray());
+                            break;
+                        default:
+                            throw new ArgumentException($"cannot save bank {item}");
+                    }
+
+                }
+                var nr= await cnt.SaveChangesAsync();               
+                return nr;
             }
-            return await cnt.SaveChangesAsync();
 
         }
     }

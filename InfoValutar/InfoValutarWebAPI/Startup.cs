@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using InfovalutarDB;
 using InfoValutarLoadingLibs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace InfoValutarWebAPI
         {
             services.AddControllers();
             services.AddSingleton< LoadExchangeProviders>(new LoadExchangeProviders("plugins"));
+            services.AddScoped<IRetrieve>(s => new RetrieveSqlServer());
             services.AddApiVersioning();
             services.AddOpenApiDocument(c=> {
                 

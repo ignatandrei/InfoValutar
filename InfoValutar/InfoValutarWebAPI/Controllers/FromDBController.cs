@@ -43,8 +43,8 @@ namespace InfoValutarWebAPI.Controllers
             DateTime from = DateTime.ParseExact(fromDate, "yyyyMMdd", null);
             DateTime to = DateTime.ParseExact(toDate, "yyyyMMdd", null);
             var ret = await retrieve.Rates(bank, from, to);
-            //return ret;
-            return new[] { new ExchangeRates() { Bank = "ASD" } };
+            return ret;
+            //return new[] { new ExchangeRates() { Bank = "ASD" } };
         }
         /// <summary>
         /// get rate
@@ -64,8 +64,8 @@ namespace InfoValutarWebAPI.Controllers
             //TODO: return an error if not correct year...
             DateTime dt = new DateTime(year, month, day);
             var ret=await retrieve.Rate(bank, dt, exchange);
-            //return ret.ExchangeValue.ToString();
-            return "35";
+            return ret.ExchangeValue.ToString();
+            
             
         }
         /// <summary>
@@ -80,8 +80,8 @@ namespace InfoValutarWebAPI.Controllers
             await Task.Delay(100);
             DateTime dt = DateTime.Today;
             var ret= await retrieve.Rate(bank, dt, exchange);
-            //return ret.ExchangeValue.ToString();
-            return "24";
+            return ret.ExchangeValue.ToString();
+            
             
         }
         /// <summary>

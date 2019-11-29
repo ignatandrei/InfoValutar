@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace InfovalutarDB
@@ -15,14 +16,18 @@ namespace InfovalutarDB
         IConfigurationRoot configuration;
         private InMemoryDB()
         {
-            configuration = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json")
-            .Build();
+            var dir = AppDomain.CurrentDomain.BaseDirectory;
+            if (File.Exists(Path.Combine(dir, "appsettings.json")))
+            {
+                configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+            }
         }
         internal string GetConRead(string name)
         {
-            return configuration.GetConnectionString(name);
+            return configuration?.GetConnectionString(name);
             
 
         }

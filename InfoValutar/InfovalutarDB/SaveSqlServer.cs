@@ -22,18 +22,7 @@ namespace InfovalutarDB
         {
             var data = er.Select(it => it.Bank?.ToLower()).Distinct();
 
-            DbContextOptionsBuilder<InfoValutarContext> opt;
-            var ConnectionString = mem.GetConRead("DBRead");
-
-            if (string.IsNullOrWhiteSpace(ConnectionString ))
-            {
-                opt = mem.MemoryOptions();
-            }
-            else
-            {
-                opt = new DbContextOptionsBuilder<InfoValutarContext>();
-                opt.UseSqlServer(ConnectionString);
-            }
+            var opt = mem.SqlOrMemory("DBWrite");
 
             using (var cnt = new InfoValutarContext(opt.Options))
             {

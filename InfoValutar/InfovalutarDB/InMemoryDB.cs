@@ -18,13 +18,33 @@ namespace InfovalutarDB
             this.configuration = config;
             
         }
-        internal string GetConRead(string name)
+        private string GetConRead(string name)
         {
             return configuration?.GetConnectionString(name);
             
 
         }
-        internal DbContextOptionsBuilder<InfoValutarContext> MemoryOptions()
+        public static void ResetInMemoryDatabase()
+        {            
+            var cnt = new InfoValutarContext(new InMemoryDB(null).SqlOrMemory(null).Options);
+            cnt.Database.EnsureDeleted();
+        }
+        internal DbContextOptionsBuilder<InfoValutarContext> SqlOrMemory(string name)
+        {
+            var ConnectionString = GetConRead(name);
+
+            if (string.IsNullOrWhiteSpace(ConnectionString))
+            {
+                opt = MemoryOptions();
+            }
+            else
+            {
+                opt = new DbContextOptionsBuilder<InfoValutarContext>();
+                opt.UseSqlServer(ConnectionString);
+            }
+            return opt;
+        }
+        private DbContextOptionsBuilder<InfoValutarContext> MemoryOptions()
         {
             if (opt != null)
                 return opt;

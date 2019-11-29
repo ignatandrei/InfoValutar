@@ -18,7 +18,8 @@ namespace InfovalutarTest
         [Trait("External", "0")]
         public async Task SaveAndRetrieve()
         {
-            ISave s = new SaveSqlServer();
+            InMemoryDB mem = new InMemoryDB(null);
+            ISave s = new SaveSqlServer(mem);
             var response = await File.ReadAllTextAsync(Path.Combine("Data", "20191020bnr.txt"));
             var m = new MockHttpMessageHandler();
             m.When("https://www.bnr.ro/nbrfxrates.xml")
@@ -28,7 +29,7 @@ namespace InfovalutarTest
             var data = await nbr.GetActualRates().ToArrayAsync();
             var nr= await s.Save(data);
             Assert.Equal(nr, data.Length);
-            var q = new RetrieveSqlServer();
+            var q = new RetrieveSqlServer(mem);
             var t = await q.Rates("BNR", DateTime.MinValue, DateTime.MaxValue);
             Assert.Equal(nr, t.Length);
         }

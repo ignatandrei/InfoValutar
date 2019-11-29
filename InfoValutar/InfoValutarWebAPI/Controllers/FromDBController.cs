@@ -13,7 +13,7 @@ namespace InfoValutarWebAPI.Controllers
     /// retrieve data from database
     /// </summary>
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/rates")]
     [ApiController]
     public class FromDBController : ControllerBase
     {
@@ -33,7 +33,8 @@ namespace InfoValutarWebAPI.Controllers
         /// <param name="fromDate">in the form yyyyMMdd</param>
         /// <param name="toDate">in the form yyyyMMdd</param>
         /// <returns></returns>
-        public async Task<ExchangeRates[]> Rates(string bank,string fromDate, string toDate)
+        [HttpGet("{bank}/{fromDate}/{toDate}")]
+        public async Task<ExchangeRates[]> Rates([FromRoute] string bank, [FromRoute]string fromDate, [FromRoute]string toDate)
         {
             //TODO: return an error if not parseexact
             DateTime from = DateTime.ParseExact(fromDate, "yyyyMMdd", null);

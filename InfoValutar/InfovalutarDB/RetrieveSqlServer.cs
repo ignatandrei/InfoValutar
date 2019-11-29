@@ -10,17 +10,23 @@ namespace InfovalutarDB
 {
     public class RetrieveSqlServer : IRetrieve
     {
+        private readonly InMemoryDB mem;
+
+        public RetrieveSqlServer(InMemoryDB mem)
+        {
+            this.mem = mem;
+        }
         public async Task<ExchangeRates[]> Rates(string bank, DateTime fromDate, DateTime toDate)
         {
 
 
             
             DbContextOptionsBuilder<InfoValutarContext> opt;
-            var ConnectionString = InMemoryDB.sing.GetConRead("DBRead");
+            var ConnectionString = mem.GetConRead("DBRead");
 
             if (string.IsNullOrWhiteSpace(ConnectionString))
             {
-                opt = InMemoryDB.sing.MemoryOptions();
+                opt = mem.MemoryOptions();
             }
             else
             {

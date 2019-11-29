@@ -9,21 +9,14 @@ using System.Text;
 
 namespace InfovalutarDB
 {
-    class InMemoryDB
+    public class InMemoryDB
     {
         DbContextOptionsBuilder<InfoValutarContext> opt;
-        
-        IConfigurationRoot configuration;
-        private InMemoryDB()
+        IConfiguration configuration;
+        public InMemoryDB(IConfiguration config)
         {
-            var dir = AppDomain.CurrentDomain.BaseDirectory;
-            if (File.Exists(Path.Combine(dir, "appsettings.json")))
-            {
-                configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-            }
+            this.configuration = config;
+            
         }
         internal string GetConRead(string name)
         {
@@ -41,6 +34,6 @@ namespace InfovalutarDB
             return opt;
         }
 
-        internal static InMemoryDB sing = new InMemoryDB();
+        
     }
 }

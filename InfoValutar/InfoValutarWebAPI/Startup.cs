@@ -32,7 +32,8 @@ namespace InfoValutarWebAPI
         {
             services.AddControllers();
             services.AddSingleton< LoadExchangeProviders>(new LoadExchangeProviders("plugins"));
-            services.AddScoped<IRetrieve>(s => new RetrieveSqlServer());
+            services.AddSingleton<InMemoryDB>();
+            services.AddScoped<IRetrieve>(s => new RetrieveSqlServer(s.GetService<InMemoryDB>()));
             services.AddApiVersioning();
             services.AddOpenApiDocument(c=> {
                 

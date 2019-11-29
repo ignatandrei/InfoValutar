@@ -12,20 +12,22 @@ namespace InfovalutarDB
 {
     public class SaveSqlServer : ISave
     {
-        public SaveSqlServer()
-        {
+        private readonly InMemoryDB mem;
 
+        public SaveSqlServer(InMemoryDB mem)
+        {
+            this.mem = mem;
         }
         public async Task<int> Save(params ExchangeRates[] er)
         {
             var data = er.Select(it => it.Bank?.ToLower()).Distinct();
 
             DbContextOptionsBuilder<InfoValutarContext> opt;
-            var ConnectionString = InMemoryDB.sing.GetConRead("DBRead");
+            var ConnectionString = mem.GetConRead("DBRead");
 
             if (string.IsNullOrWhiteSpace(ConnectionString ))
             {
-                opt = InMemoryDB.sing.MemoryOptions();
+                opt = mem.MemoryOptions();
             }
             else
             {

@@ -5,7 +5,6 @@ GitHub Actions :
 
 Azure Build
 [![Build Status](https://dev.azure.com/ignatandrei0674/InfoValutar/_apis/build/status/ignatandrei.InfoValutar?branchName=master)](https://dev.azure.com/ignatandrei0674/InfoValutar/_build/latest?definitionId=5&branchName=master)
-
 ![Azure DevOps tests (branch)](https://img.shields.io/azure-devops/tests/ignatandrei0674/InfoValutar/5/master)
 
 Docker :

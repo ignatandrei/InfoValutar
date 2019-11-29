@@ -10,19 +10,12 @@ Azure Build
 
 Docker :
 ![Docker Pulls](https://img.shields.io/docker/pulls/ignatandrei/infovalutar)
-
-
-# How to use:
-## Docker:
-
 docker run --rm -d -p 8080:8080 ignatandrei/infovalutar:latest
-
 http://localhost:8080/swagger
 
-## Play directly with Docker
-
-https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ignatandrei/InfoValutar/master/PlayWithDocker/WebAPI.yml
+[![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/ignatandrei/InfoValutar/master/PlayWithDocker/WebAPI.yml)
 ( press the Login/Start, then 8080 link . Close the session / Refresh the session page if not works  )
+
 
 ## Site
 

@@ -21,17 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!--<Content Update="plugins\**\*.dll" CopyToOutputDirectory="Always" LinkBase="plugins">
-      
-    </Content>-->
-    <!--<Content Update="$([System.IO.Directory]::GetFiles('$(ProjectDir)plugins', '*.*', SearchOption.AllDirectories))" CopyToOutputDirectory="PreserveNewest">-->
-      
-    <!--</Content>-->
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.0.0" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.1.6" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

@@ -39,11 +39,21 @@ jobs:
       platform: '$(buildPlatform)'
       configuration: '$(buildConfiguration)'
 
-  - task: VSTest@2
+#  - task: VSTest@2
+#    inputs:
+#      platform: '$(buildPlatform)'
+#      configuration: '$(buildConfiguration)'
+      
+  - script: |
+      cd InfoValutar
+      dotnet test --logger trx  --configuration $(buildConfiguration) --no-build  /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura -v m /p:CoverletOutput=cob.xml
+      dotnet reportgenerator "-reports:InfovalutarTest/cob.xml" "-targetdir:coveragereport" "-reporttypes:HTMLInline;HTMLSummary;Badges"
+    displayName: restore tools 
+  
+  - task: PublishTestResults@2
     inputs:
-      platform: '$(buildPlatform)'
-      configuration: '$(buildConfiguration)'
-
+      testRunner: VSTest
+      testResultsFiles: '**/*.trx'
       
 - job: Build_Docker
   dependsOn: 

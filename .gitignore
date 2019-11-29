@@ -332,3 +332,4 @@ ASALocalRun/
 
 #Various files to not be included in source because are self generating
 InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.xml
+InfoValutar/InfovalutarTest/cob.xml

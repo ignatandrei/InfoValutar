@@ -20,14 +20,14 @@ namespace InfoValutarWebAPI.Controllers
     [ApiController]
     public class FromDBController : ControllerBase
     {
-        private readonly IRetrieve ret;
+        private readonly IRetrieve retrieve;
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="ret"></param>
         public FromDBController(IRetrieve ret)
         {
-            this.ret = ret;
+            this.retrieve = ret;
         }
         /// <summary>
         /// 
@@ -42,7 +42,9 @@ namespace InfoValutarWebAPI.Controllers
             //TODO: return an error if not parseexact
             DateTime from = DateTime.ParseExact(fromDate, "yyyyMMdd", null);
             DateTime to = DateTime.ParseExact(toDate, "yyyyMMdd", null);
-            return await ret.Rates(bank, from, to);
+            var ret = await retrieve.Rates(bank, from, to);
+            //return ret;
+            return new[] { new ExchangeRates() { Bank = "ASD" } };
         }
         /// <summary>
         /// get rate
@@ -61,7 +63,10 @@ namespace InfoValutarWebAPI.Controllers
         {
             //TODO: return an error if not correct year...
             DateTime dt = new DateTime(year, month, day);
-            return await ret.Rate(bank, dt,exchange);
+            var ret=await retrieve.Rate(bank, dt, exchange);
+            //return ret;
+            return new ExchangeRates() { Bank = "ASD" };
+            
         }
         /// <summary>
         /// 
@@ -72,9 +77,12 @@ namespace InfoValutarWebAPI.Controllers
         [HttpGet("{bank}/azi/{exchange}")]
         public async Task<ExchangeRates> RatesToday([FromRoute] string bank,[FromRoute] string exchange)
         {
-            
+            await Task.Delay(100);
             DateTime dt = DateTime.Today;
-            return await ret.Rate(bank, dt, exchange);
+            var ret= await retrieve.Rate(bank, dt, exchange);
+            //return ret;
+            return new ExchangeRates() { Bank = "ASD" };
+            
         }
         /// <summary>
         /// Gets the rss feed
@@ -85,7 +93,7 @@ namespace InfoValutarWebAPI.Controllers
         public async Task<IActionResult> GetRssFeed(string bank)
         {
             //TODO: move the logic somewhere where can be tested
-            var data= await ret.TodayRates(bank);
+            var data= await retrieve.TodayRates(bank);
             var items = data
                 .Select(it =>
                 new SyndicationItem(
@@ -102,7 +110,7 @@ namespace InfoValutarWebAPI.Controllers
                 items
                 );
             feed.Language = "ro-ro";
-            feed.TimeToLive = TimeSpan.FromSeconds(30);
+            feed.TimeToLive = TimeSpan.FromMinutes(10);
             using var sw = new StringWriter();
             using var rssWriter = XmlWriter.Create(sw);
 

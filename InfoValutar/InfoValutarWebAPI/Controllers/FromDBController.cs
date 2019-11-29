@@ -57,15 +57,15 @@ namespace InfoValutarWebAPI.Controllers
         /// <returns></returns>
         [HttpGet("{year}/{month}/{day}/{exchange}.{bank}")]
         [HttpGet("{bank}/{year}/{month}/{day}/{exchange}")]
-        public async Task<ExchangeRates> RatesOnDate([FromRoute] string bank, 
+        public async Task<string> RatesOnDate([FromRoute] string bank, 
             [FromRoute]int year, [FromRoute]int month,
             [FromRoute] int day, [FromRoute] string exchange)
         {
             //TODO: return an error if not correct year...
             DateTime dt = new DateTime(year, month, day);
             var ret=await retrieve.Rate(bank, dt, exchange);
-            //return ret;
-            return new ExchangeRates() { Bank = "ASD" };
+            //return ret.ExchangeValue.ToString();
+            return "35";
             
         }
         /// <summary>
@@ -75,13 +75,13 @@ namespace InfoValutarWebAPI.Controllers
         /// <param name="exchange"></param>
         /// <returns></returns>
         [HttpGet("{bank}/azi/{exchange}")]
-        public async Task<ExchangeRates> RatesToday([FromRoute] string bank,[FromRoute] string exchange)
+        public async Task<string> RatesToday([FromRoute] string bank,[FromRoute] string exchange)
         {
             await Task.Delay(100);
             DateTime dt = DateTime.Today;
             var ret= await retrieve.Rate(bank, dt, exchange);
-            //return ret;
-            return new ExchangeRates() { Bank = "ASD" };
+            //return ret.ExchangeValue.ToString();
+            return "24";
             
         }
         /// <summary>

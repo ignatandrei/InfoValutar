@@ -15,6 +15,14 @@ namespace InfovalutarLoadAndSave
         public bool HasSuccess { get; internal set; }
         public string ErrorMessage { get; internal set; }
     }
+    /// <summary>
+    /// questions at http://msprogrammer.serviciipeweb.ro/2019/12/19/saving-multiple-datapart-31/
+    /// How we can display the errors ?
+    /// What if the data exists already for this day and I cannot save into database, because it exists?
+    /// How to acknowledge what exists and what not , in one operation ?
+    /// How to report success even if data exists ? Should we report number of records?
+    /// How we can perform async all that stuff and, however , report errors ?
+    /// </summary>
     public class LoadAndSaveLastData
     {
         private readonly ISave save;

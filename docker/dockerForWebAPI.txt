@@ -15,6 +15,7 @@ COPY  InfoValutar/InfoValutarLoadingLibs/InfoValutarLoadingLibs.csproj ./InfoVal
 COPY  InfoValutar/InfoValutarWebAPI/InfoValutarWebAPI.csproj ./InfoValutarWebAPI/InfoValutarWebAPI.csproj
 COPY  InfoValutar/InfoValutarPluginStarter/InfoValutarPluginStarter.csproj ./InfoValutarPluginStarter/InfoValutarPluginStarter.csproj
 COPY  InfoValutar/InfovalutarDB/InfovalutarDB.csproj ./InfovalutarDB/InfovalutarDB.csproj
+COPY  InfoValutar/InfovalutarLoadAndSave/InfovalutarLoadAndSave.csproj ./InfovalutarLoadAndSave/InfovalutarLoadAndSave.csproj
 
 #RUN ls -l ./app/InfoValutarDOS/
 RUN dotnet tool restore

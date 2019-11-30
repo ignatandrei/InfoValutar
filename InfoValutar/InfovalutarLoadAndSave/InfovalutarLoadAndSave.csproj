@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Interactive.Async" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InfovalutarDB\InfovalutarDB.csproj" />
+    <ProjectReference Include="..\InfoValutarLoadingLibs\InfoValutarLoadingLibs.csproj" />
+  </ItemGroup>
+
+ 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="dotnet pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins&quot;  &quot;$(ProjectDir)&quot;" />
+  </Target>
+
+</Project>

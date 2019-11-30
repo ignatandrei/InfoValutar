@@ -17,6 +17,10 @@ namespace InfovalutarDB
             this.mem = mem;
         }
 
+        public async Task<bool> Exists(ExchangeRates ex)
+        {
+            return (await Rate(ex.Bank, ex.Date, ex.ExchangeFrom)) != null;
+        }
         public async Task<ExchangeRates> Rate(string bank, DateTime date, string exchangeFrom)
         {
             var opt = mem.SqlOrMemory("DBRead");
@@ -52,7 +56,8 @@ namespace InfovalutarDB
                                 Bank = bank,
                                 Date = it.Date,
                                 ExchangeFrom = it.ExchangeFrom,
-                                ExchangeTo = it.ExchangeTo
+                                ExchangeTo = it.ExchangeTo,
+                                ExchangeValue =it.ExchangeValue
                             });                   
                 
             

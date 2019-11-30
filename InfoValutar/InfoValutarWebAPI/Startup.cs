@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using InfovalutarDB;
+using InfovalutarLoadAndSave;
 using InfoValutarLoadingLibs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,10 @@ namespace InfoValutarWebAPI
             services.AddControllers();
             services.AddSingleton< LoadExchangeProviders>(new LoadExchangeProviders("plugins"));
             services.AddSingleton<InMemoryDB>();
+            
             services.AddScoped<IRetrieve>(s => new RetrieveSqlServer(s.GetService<InMemoryDB>()));
+            services.AddScoped<ISave>(s => new SaveSqlServer(s.GetService<InMemoryDB>()));
+            services.AddScoped<LoadAndSaveLastData>();
             services.AddApiVersioning();
             services.AddOpenApiDocument(c=> {
                 

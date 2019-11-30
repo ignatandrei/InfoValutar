@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InfovalutarDB\InfovalutarDB.csproj" />
+    <ProjectReference Include="..\InfovalutarLoadAndSave\InfovalutarLoadAndSave.csproj" />
     <ProjectReference Include="..\InfoValutarLoadingLibs\InfoValutarLoadingLibs.csproj" />
   </ItemGroup>
 

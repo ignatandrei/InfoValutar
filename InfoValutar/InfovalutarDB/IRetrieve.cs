@@ -11,5 +11,7 @@ namespace InfovalutarDB
         public Task<ExchangeRates> Rate(string bank, DateTime date, string exchangeFrom);
 
         public Task<ExchangeRates[]> TodayRates(string bank);
+
+        public Task<bool> Exists(ExchangeRates ex);
     }
 }

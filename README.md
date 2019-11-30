@@ -20,3 +20,14 @@ http://localhost:8080/swagger
 ## Site
 
 https://infovalutar.azurewebsites.net/
+
+## To run the project ( for developers )
+
+If you have Visual Studio 2019 ( at least Community ) and .NET Core 3, then run
+
+dotnet tool restore
+
+in the folder with InfoValutar.sln file . Then you can open InfoValutar.sln 
+
+If you have Visual Studio Code - then install Remote Explorer extension and open the folder with InfoValutar.sln
+

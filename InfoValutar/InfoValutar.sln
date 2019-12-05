@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoValutarPluginStarter", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfovalutarDB", "InfovalutarDB\InfovalutarDB.csproj", "{C7AB302D-1DC4-46F5-8ADC-5DDE68473301}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfovalutarLoadAndSave", "InfovalutarLoadAndSave\InfovalutarLoadAndSave.csproj", "{7C952200-4095-443C-93CF-7FA29040EF77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfovalutarLoadAndSave", "InfovalutarLoadAndSave\InfovalutarLoadAndSave.csproj", "{7C952200-4095-443C-93CF-7FA29040EF77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFuncLoadData", "AzureFuncLoadData\AzureFuncLoadData.csproj", "{3454607B-6AFF-4869-8D83-284C514C20EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{7C952200-4095-443C-93CF-7FA29040EF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C952200-4095-443C-93CF-7FA29040EF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C952200-4095-443C-93CF-7FA29040EF77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3454607B-6AFF-4869-8D83-284C514C20EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3454607B-6AFF-4869-8D83-284C514C20EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3454607B-6AFF-4869-8D83-284C514C20EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3454607B-6AFF-4869-8D83-284C514C20EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

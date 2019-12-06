@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
@@ -27,6 +27,6 @@
     </None>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="dotnet pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins\&quot;  &quot;$(TargetDir)&quot;" />
+    <Exec Command="dotnet pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins&quot;  &quot;$(ProjectDir)&quot;" />
   </Target>
 </Project>

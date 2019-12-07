@@ -195,6 +195,13 @@ jobs:
         replaceExistingArchive: true 
     displayName: 'arhive files'
     
+  - task: AzureFunctionApp@1
+    displayName: Azure Function App Deploy
+    inputs:
+        azureSubscription: 'InfoValutarServiceConnection'
+        appName: azurefuncloaddata20191205080713
+        package: $(Build.ArtifactStagingDirectory)/InfoValLinuxX64.zip
+
   - task: PublishBuildArtifacts@1
     inputs:
         artifactName: 'azureFunction' 

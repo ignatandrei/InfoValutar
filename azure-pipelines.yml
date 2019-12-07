@@ -178,7 +178,7 @@ jobs:
       echo "start build"
       dotnet build --configuration $(buildConfiguration) -r linux-x64 InfoValutar/InfoValutar.sln /m:1
       echo "----done build, start publish InfoValutarLoadingLibs"
-      dotnet publish InfoValutar/InfoValutarLoadingLibs/InfoValutarLoadingLibs.csproj --confi guration $(buildConfiguration) --self-contained --no-restore --no-build -r linux-x64 -p:PublishSingleFile=false  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64LoadingLibs
+      dotnet publish InfoValutar/InfoValutarLoadingLibs/InfoValutarLoadingLibs.csproj --configuration $(buildConfiguration) --self-contained --no-restore --no-build -r linux-x64 -p:PublishSingleFile=false  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64LoadingLibs
       echo "--- done publish, start publish AzureFuncLoadData"
       dotnet publish InfoValutar/AzureFuncLoadData/AzureFuncLoadData.csproj --configuration $(buildConfiguration) --no-build -r linux-x64 -p:PublishSingleFile=false  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64
       echo "-- done publish, start xcopy"

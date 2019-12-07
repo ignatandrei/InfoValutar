@@ -192,6 +192,6 @@ jobs:
     displayName: 'arhive files'
     
   - task: PublishBuildArtifacts@1
-  inputs:
-    artifactName: 'azureFunction' 
+    inputs:
+        artifactName: 'azureFunction' 
     

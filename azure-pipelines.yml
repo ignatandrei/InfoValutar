@@ -151,7 +151,7 @@ jobs:
 - job: DeployAzureFunction
   dependsOn: 
   - Build_With_Test
-  condition: and(succeeded(),false)
+  condition: and(succeeded(),true)
   pool:
     vmImage: 'windows-latest'
   

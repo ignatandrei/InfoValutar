@@ -147,7 +147,7 @@ jobs:
     condition: always() # always restart azure
     displayName: start azure    
 
-andrei
+
 - job: DeployAzureFunction
   dependsOn: 
   - Build_With_Test

@@ -190,4 +190,8 @@ jobs:
         archiveFile: '$(Build.ArtifactStagingDirectory)/InfoValLinuxX64.zip' 
         replaceExistingArchive: true 
     displayName: 'arhive files'
-  
+    
+  - task: PublishBuildArtifacts@1
+  inputs:
+    artifactName: 'azureFunction' 
+    

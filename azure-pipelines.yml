@@ -182,7 +182,7 @@ jobs:
       echo "--- done publish, start publish AzureFuncLoadData"
       dotnet publish InfoValutar/AzureFuncLoadData/AzureFuncLoadData.csproj --configuration $(buildConfiguration) --no-build -r linux-x64 -p:PublishSingleFile=false  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64
       echo "-- done publish, start xcopy"
-      echo $(Build.ArtifactStagingDirectory)/InfoValLinuxX64LoadingLibs/*.* $(Build.ArtifactStagingDirectory)/InfoValLinuxX64/ /Y /D
+      xcopy $(Build.ArtifactStagingDirectory)\InfoValLinuxX64LoadingLibs\*.* $(Build.ArtifactStagingDirectory)\InfoValLinuxX64\ /Y /D
       
     displayName: publish again  
 

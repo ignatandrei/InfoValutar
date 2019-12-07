@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
@@ -11,16 +11,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-    <ItemGroup>
-    <None Remove="plugins\readme.md" />
-  </ItemGroup>
-
   <ItemGroup>
-    <Content Include="plugins\readme.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Remove="plugins\" />
+    <Content Include="plugins\**\*.dll" CopyToOutputDirectory="Always" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.1" />
   </ItemGroup>
@@ -37,6 +31,6 @@
     </None>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="dotnet pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins&quot;  &quot;$(TargetDir)&quot;" />
+    <Exec Command="dotnet pwsh $(ProjectDir)preBuild.ps1 &quot;$(RepoRoot)plugins&quot;  &quot;$(ProjectDir)&quot;" />
   </Target>
 </Project>

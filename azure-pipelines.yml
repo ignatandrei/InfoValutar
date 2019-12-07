@@ -64,7 +64,7 @@ jobs:
 - job: Build_Docker
   dependsOn: 
   - Build_With_Test
-  condition: and(succeeded(),true)
+  condition: and(succeeded(),false)
   pool:
     vmImage: 'ubuntu-16.04'
   
@@ -78,10 +78,10 @@ jobs:
           docker push ignatandrei/infovalutar
     displayName: create docker
 
-- job: DeployAzure
+- job: DeployAzureSite
   dependsOn: 
   - Build_With_Test
-  condition: and(succeeded(),true)
+  condition: and(succeeded(),false)
   pool:
     vmImage: 'windows-latest'
   
@@ -146,3 +146,48 @@ jobs:
         ResourceGroupName: 'infovalutarRG'
     condition: always() # always restart azure
     displayName: start azure    
+
+andrei
+- job: DeployAzureFunction
+  dependsOn: 
+  - Build_With_Test
+  condition: and(succeeded(),false)
+  pool:
+    vmImage: 'windows-latest'
+  
+  variables:
+    solution: '**/*.sln'
+    buildPlatform: 'Any CPU'
+    buildConfiguration: 'Release'
+
+
+  steps:
+  - task: NuGetToolInstaller@1
+
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '$(solution)'
+  
+  - script: |
+      cd InfoValutar
+      dotnet tool restore
+    displayName: restore tools
+      
+
+  - script: |
+      dotnet build --configuration $(buildConfiguration) -r linux-x64 InfoValutar/InfoValutar.sln /m:1
+      dotnet publish InfoValutar/InfoValutarLoadingLibs/InfoValutarLoadingLibs.csproj --configuration $(buildConfiguration) --no-build -r linux-x64 -p:PublishSingleFile=false  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64LoadingLibs
+      dotnet publish InfoValutar/AzureFuncLoadData/AzureFuncLoadData.csproj --configuration $(buildConfiguration) --no-build -r linux-x64 -p:PublishSingleFile=false  -o $(Build.ArtifactStagingDirectory)/InfoValLinuxX64
+      xcopy $(Build.ArtifactStagingDirectory)/InfoValLinuxX64LoadingLibs/*.* $(Build.ArtifactStagingDirectory)/InfoValLinuxX64/ /Y /D
+      
+    displayName: publish again  
+
+  - task: ArchiveFiles@2
+    inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/InfoValLinuxX64'
+        includeRootFolder: false
+        archiveType: 'zip' 
+        archiveFile: '$(Build.ArtifactStagingDirectory)/InfoValLinuxX64.zip' 
+        replaceExistingArchive: true 
+    displayName: 'arhive files'
+  

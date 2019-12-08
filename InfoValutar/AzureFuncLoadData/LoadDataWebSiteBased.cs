@@ -22,7 +22,7 @@ namespace AzureFuncLoadData
             var http = new HttpClient();
             var data = await http.GetStringAsync(url);
             log.Info($"obtaining data {data}");
-
+            Console.WriteLine($"obtaining data {data}");
         }
     }
 }

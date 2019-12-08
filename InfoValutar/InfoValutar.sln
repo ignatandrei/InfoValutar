@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfovalutarDB", "Infovaluta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfovalutarLoadAndSave", "InfovalutarLoadAndSave\InfovalutarLoadAndSave.csproj", "{7C952200-4095-443C-93CF-7FA29040EF77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFuncLoadData", "AzureFuncLoadData\AzureFuncLoadData.csproj", "{3454607B-6AFF-4869-8D83-284C514C20EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFuncLoadData", "AzureFuncLoadData\AzureFuncLoadData.csproj", "{3454607B-6AFF-4869-8D83-284C514C20EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

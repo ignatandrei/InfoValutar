@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using InfovalutarDB;
 using InfoValutarNBR;
@@ -11,30 +12,17 @@ namespace AzureFuncLoadData
 {
     public static class LoadDataFromNBR
     {
-        [FunctionName("LoadDataFromNBR")]
+        [FunctionName("LoadDataWebSiteBased")]
         public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, TraceWriter log)
         {
             
-            log.Info($"LOAD NBR function processed a request: {DateTime.Now}");
+            log.Info($"LOAD from website: {DateTime.Now}");
             Console.WriteLine("------------------------!!");
-            var nbr = new GetNBRExchange();
-            var data = await nbr.GetActualRates();
-            foreach (var item in data)
-            {
-                log.Info($"1 {item.ExchangeFrom} = {item.ExchangeValue} {item.ExchangeTo}");
+            var url = "https://infovalutar.azurewebsites.net/api/v1.0/save/LoadAndSaveAll";
+            var http = new HttpClient();
+            var data = http.GetStringAsync(url);
+            log.Info($"obtaining data");
 
-            }
-            log.Info("now saving to database");
-            try
-            {
-                log.Info("trying to save");
-                ISave save = new SaveSqlServer(null);
-                await save.Save(data.ToArray());
-            }
-            catch(Exception ex)
-            {
-                log.Error($"ERROR !! {ex.Message}");
-            }
         }
     }
 }

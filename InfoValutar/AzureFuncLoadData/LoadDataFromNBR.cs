@@ -20,7 +20,7 @@ namespace AzureFuncLoadData
             Console.WriteLine("------------------------!!");
             var url = "https://infovalutar.azurewebsites.net/api/v1.0/save/LoadAndSaveAll";
             var http = new HttpClient();
-            var data = http.GetStringAsync(url);
+            var data = await http.GetStringAsync(url);
             log.Info($"obtaining data {data}");
 
         }

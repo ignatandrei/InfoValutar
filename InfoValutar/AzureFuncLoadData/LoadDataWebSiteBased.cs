@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AzureFuncLoadData
 {
-    public static class LoadDataFromNBR
+    public static class LoadDataWebSiteBased
     {
         [FunctionName("LoadDataWebSiteBased")]
         public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, TraceWriter log)

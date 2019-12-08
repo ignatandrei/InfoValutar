@@ -49,8 +49,8 @@ namespace InfoValutarECB
                 {
                     Bank = orig,
                     Date = date,
-                    ExchangeFrom = "EUR",
-                    ExchangeTo = item.currency,
+                    ExchangeTo = "EUR",
+                    ExchangeFrom = item.currency,
                     ExchangeValue = item.rate
                 };
                 ret.Add(exch);

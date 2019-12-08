@@ -21,7 +21,7 @@ namespace AzureFuncLoadData
             var url = "https://infovalutar.azurewebsites.net/api/v1.0/save/LoadAndSaveAll";
             var http = new HttpClient();
             var data = http.GetStringAsync(url);
-            log.Info($"obtaining data");
+            log.Info($"obtaining data {data}");
 
         }
     }

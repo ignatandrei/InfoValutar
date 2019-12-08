@@ -13,7 +13,7 @@ namespace AzureFuncLoadData
         {
             
             log.Info($"LOAD NBR function processed a request: {DateTime.Now}");
-            
+            Console.WriteLine("------------------------!!");
             var nbr = new GetNBRExchange();
             var data = nbr.GetActualRates().GetAwaiter().GetResult();
             foreach (var item in data)

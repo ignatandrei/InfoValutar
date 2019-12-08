@@ -27,7 +27,7 @@ namespace InfovalutarTest
                 .Respond("application/text", response);
 
             var nbr = new GetNBRExchange(m);
-            var data = await nbr.GetActualRates().ToArrayAsync();
+            var data = (await nbr.GetActualRates()).ToArray();
             var nr= await s.Save(data);
             Assert.Equal(nr, data.Length);
             var q = new RetrieveSqlServer(mem);
@@ -47,8 +47,8 @@ namespace InfovalutarTest
                 .Respond("application/text", response);
 
             var nbr = new GetNBRExchange(m);
-            var data = await nbr.GetActualRates().ToArrayAsync();
-            var nr = await s.Save(data);
+            var data = (await nbr.GetActualRates()).ToArray();
+            var     nr = await s.Save(data);
             var f = data[0];
             var q = new RetrieveSqlServer(mem);
             var t = await q.Rate("BNR",f.Date.Date,f. ExchangeFrom);

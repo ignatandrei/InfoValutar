@@ -15,7 +15,7 @@ namespace InfovalutarTest
         public async Task TestLive()
         {
             var nbr = new GetNBRExchange();
-            await foreach(var e in nbr.GetActualRates())
+            foreach(var e in await nbr.GetActualRates())
             {
                 if(e.ExchangeFrom == "EUR")
                 {
@@ -35,7 +35,7 @@ namespace InfovalutarTest
                 .Respond("application/text", response);
 
             var nbr = new GetNBRExchange(m);
-            await foreach (var e in nbr.GetActualRates())
+             foreach (var e in await nbr.GetActualRates())
             {
                 if (e.ExchangeFrom == "EUR")
                 {

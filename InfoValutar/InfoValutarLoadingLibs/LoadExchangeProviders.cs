@@ -29,7 +29,7 @@ namespace InfoValutarLoadingLibs
                     
                 default:
                     {
-                        await foreach (var data in provBank.GetActualRates())
+                         foreach (var data in await provBank.GetActualRates())
                         {
                             yield return data;
                         }

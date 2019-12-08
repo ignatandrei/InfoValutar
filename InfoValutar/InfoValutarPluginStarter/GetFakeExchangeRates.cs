@@ -9,16 +9,18 @@ namespace InfoValutarPluginStarter
     {
         public string Bank => "FakeBank";
 
-        public async IAsyncEnumerable<ExchangeRates> GetActualRates()
+        public async Task<IEnumerable<ExchangeRates>> GetActualRates()
         {
             await Task.Delay(10);
-            yield return new ExchangeRates()
+            return new[] {
+            new ExchangeRates()
             {
                 Bank = this.Bank,
                 ExchangeFrom = "Fake1",
                 ExchangeTo = "Fake2",
                 Date = DateTime.Now,
                 ExchangeValue = 1
+            }
             };
         }
     }

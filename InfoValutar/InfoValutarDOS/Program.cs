@@ -95,8 +95,8 @@ namespace InfoValutarDOS
         }
         public static async Task<ExchangeRates[]> Rates(BankGetExchange bank)
         {
-            var list = bank.GetActualRates();
-            return await list.ToArrayAsync();
+            var list = await bank.GetActualRates();
+            return list.ToArray();
             
                         
         }

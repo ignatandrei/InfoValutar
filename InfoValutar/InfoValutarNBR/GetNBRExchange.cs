@@ -28,10 +28,10 @@ namespace InfoValutarNBR
 
         public string Bank => "BNR";
 
-        public async IAsyncEnumerable<ExchangeRates> GetActualRates()
+        public async Task<IEnumerable<ExchangeRates>> GetActualRates()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-
+            var ret = new List<ExchangeRates>();
             var xml = await httpClient.GetStringAsync("https://www.bnr.ro/nbrfxrates.xml");
             //Console.WriteLine($"{xml}");
             var serializer = new XmlSerializer(typeof(DataSet));
@@ -57,8 +57,9 @@ namespace InfoValutarNBR
                 {
                     exch.ExchangeValue /= (decimal)int.Parse(item.multiplier);
                 }
-                yield return exch;
+                ret.Add(exch);
             }
+            return ret;
 
 
         }

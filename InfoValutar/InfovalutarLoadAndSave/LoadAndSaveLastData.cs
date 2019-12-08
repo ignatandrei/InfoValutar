@@ -61,7 +61,7 @@ namespace InfovalutarLoadAndSave
             foreach (var rateAsync in rates)
             {
                 
-                await foreach(var rate in rateAsync)
+                foreach(var rate in await rateAsync)
                 {
                     var item = lst[rate.Bank];
                     try

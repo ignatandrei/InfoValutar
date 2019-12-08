@@ -28,10 +28,10 @@ namespace InfoValutarECB
 
         public string Bank => "ECB";
 
-        public async IAsyncEnumerable<ExchangeRates> GetActualRates()
+        public async Task<IEnumerable<ExchangeRates>> GetActualRates()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-
+            var ret = new List<ExchangeRates>();
             var xml = await httpClient.GetStringAsync("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
             //Console.WriteLine($"{xml}");
             var serializer = new XmlSerializer(typeof(Envelope));
@@ -53,8 +53,9 @@ namespace InfoValutarECB
                     ExchangeTo = item.currency,
                     ExchangeValue = item.rate
                 };
-                yield return exch;
+                ret.Add(exch);
             }
+            return ret;
 
 
         }

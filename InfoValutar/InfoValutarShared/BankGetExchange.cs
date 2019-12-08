@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace InfoValutarShared
 {
@@ -9,6 +10,6 @@ namespace InfoValutarShared
 #pragma warning restore IDE1006 // Naming Styles
     {
         public string Bank { get; }
-        IAsyncEnumerable<ExchangeRates> GetActualRates();
+        Task<IEnumerable<ExchangeRates>> GetActualRates();
     }
 }

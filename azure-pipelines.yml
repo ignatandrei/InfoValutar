@@ -64,7 +64,7 @@ jobs:
 - job: Build_Docker
   dependsOn: 
   - Build_With_Test
-  condition: and(succeeded(),false)
+  condition: and(succeeded(),true)
   pool:
     vmImage: 'ubuntu-16.04'
   
@@ -81,7 +81,7 @@ jobs:
 - job: DeployAzureSite
   dependsOn: 
   - Build_With_Test
-  condition: and(succeeded(),false)
+  condition: and(succeeded(),true)
   pool:
     vmImage: 'windows-latest'
   

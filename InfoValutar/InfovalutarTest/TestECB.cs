@@ -18,7 +18,7 @@ namespace InfovalutarTest
             var ecb= new GetECBExchange();
             foreach(var e in await ecb.GetActualRates())
             {
-                if(e.ExchangeTo == "RON")
+                if(e.ExchangeFrom  == "RON")
                 {
                     Assert.True(true);
                     return;
@@ -38,7 +38,7 @@ namespace InfovalutarTest
             var bce = new GetECBExchange(m);
             foreach (var e in await bce.GetActualRates())
             {
-                if (e.ExchangeTo == "RON")
+                if (e.ExchangeFrom  == "RON")
                 {
                     Assert.Equal(4.7800m, e.ExchangeValue, 4);
                     return;

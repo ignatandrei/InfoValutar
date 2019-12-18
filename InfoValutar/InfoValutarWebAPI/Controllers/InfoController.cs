@@ -28,7 +28,8 @@ namespace InfoValutarWebAPI.Controllers
     /// controller about info the application
     /// </summary>
     [ApiController]
-    [Route("[controller]/[Action]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/rates")]
     public class InfoController
     {
         /// <summary>

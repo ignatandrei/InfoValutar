@@ -13,7 +13,7 @@ namespace AzureFuncLoadData
     public static class LoadDataWebSiteBased
     {
         [FunctionName("LoadDataWebSiteBased")]
-        public static async Task Run([TimerTrigger("0 */5 * * * *")]TimerInfo myTimer, TraceWriter log)
+        public static async Task Run([TimerTrigger("0 1 */1 * * *")]TimerInfo myTimer, TraceWriter log)
         {
             
             log.Info($"LOAD from website: {DateTime.Now}");

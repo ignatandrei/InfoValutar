@@ -2,6 +2,12 @@
 //https://github.com/microsoft/vscode-dev-containers/blob/master/containers/dotnetcore-3.0/.devcontainer/devcontainer.json
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
 // https://github.com/microsoft/vscode-dev-containers/tree/master/containers/dotnetcore-latest
+
+//IF SOMETHING DO NOT WORK
+
+//docker container prune -f
+//docker images “vs*”
+//docker image rm <id of the prev image>
 {
 	"name": ".NET Core 3.0",
 	"dockerFile": "Dockerfile",

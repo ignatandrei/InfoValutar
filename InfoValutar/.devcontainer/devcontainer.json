@@ -1,64 +1,35 @@
-//copied from
-//https://github.com/microsoft/vscode-dev-containers/blob/master/containers/dotnetcore-3.0/.devcontainer/devcontainer.json
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
-// https://github.com/microsoft/vscode-dev-containers/tree/master/containers/dotnetcore-latest
-
-//IF SOMETHING DO NOT WORK
-
-//docker container prune -f
-//docker images “vs*”
-//docker image rm <id of the prev image>
+// https://github.com/microsoft/vscode-dev-containers/tree/master/containers/alpine-3.10-git
 {
-	"name": ".NET Core 3.0",
-	"dockerFile": "Dockerfile",
-	"appPort": [8080],		
-	"runArgs": [
-		// Uncomment the next line to use a non-root user. On Linux, this will prevent
-		// new files getting created as root, but you may need to update the USER_UID
-		// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
-		// "-u", "vscode",
+	"name": "Angular",
+	"dockerFile": "DockerfileAng",	
+	// Uncomment the next line to have VS Code connect as an existing non-root user in the container. 
+	// On Linux, by default, the container user's UID/GID will be updated to match your local user. See
+	// https://aka.ms/vscode-remote/containers/non-root for details on adding a non-root user if none exist.
+	// "remoteUser": "vscode",
 
-		// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command: 
-		//  * Windows PowerShell:
-		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere" 
-		//  * macOS/Linux terminal:
-		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-		//
-		// Next, after running the command above, uncomment the lines below and open / rebuild the container.
-		//
-		// "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
-		// "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
-		// "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
-		// "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx",
-
-		// [Optional] Override the default HTTP endpoints - need to listen to '*' for appPort to work
-		"-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:8080"
-	],
+	// Uncomment the next line if you will use a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+	
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
-	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
+	"settings": {
+		// This dev container does include /bin/bash if you prefer to use it instead of ash.
+		"terminal.integrated.shell.linux": "/bin/ash"
 	},
 
-	// Uncomment the next line if you want to publish any ports.
+	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
+	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
 	// "appPort": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore",
+	// "postCreateCommand": "uname -a",
 
-	// Uncomment the next line to use a non-root user. On Linux, this will prevent
-	// new files getting created as root, but you may need to update the USER_UID
-	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
-	// "runArgs": [ "-u", "vscode" ],
-
-	// Add the IDs of extensions you want installed when the container is created in the array below.
-	"extensions": [
-		"ms-vscode.csharp",
-		"hbenl.vscode-test-explorer",
-		"formulahendry.dotnet-test-explorer"
-	]
-	,
-	"postCreateCommand": "dotnet tool restore && dotnet build",
+	// Add the IDs of extensions you want installed when the container is created in the array 
+	// below. Note that some extensions may not work in Alpine Linux due to glibc dependencies 
+	// in native code inside the extension. See https://aka.ms/vscode-remote/linux for details.
+	"extensions": [],
+	"postCreateCommand": "cd InfovalutarWebAng && npm i",
 	"overrideCommand":true,
 	"shutdownAction": "stopContainer"
 }

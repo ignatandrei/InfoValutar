@@ -124,6 +124,10 @@ jobs:
   - powershell: .\modifyinfo.ps1
     displayName: modify info
       
+  - powershell: |
+        cd InfoValutar
+        .\copyAng.ps1
+    displayName: copy angular site to web api
 
   - script: |
       dotnet build --configuration $(buildConfiguration) -r linux-x64 InfoValutar/InfoValutar.sln /m:1

@@ -1,6 +1,7 @@
 echo "starting build angular"
 cd InfovalutarWebAng
 npm i
+npm i -g @angular/cli
 ng build  --prod --build-optimizer
 cd ..
 

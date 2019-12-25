@@ -86,7 +86,9 @@ namespace InfoValutarWebAPI
             }
 
             app.UseHttpsRedirection();
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            
             app.UseRouting();
 
             app.UseAuthorization();
@@ -111,15 +113,15 @@ namespace InfoValutarWebAPI
 
             }
             //maybe do with https://docs.microsoft.com/en-us/aspnet/core/fundamentals/url-rewriting?view=aspnetcore-3.0
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path == "/")
-                {
-                    context.Response.Redirect("/swagger");
-                    return;
-                }
-                await next.Invoke();
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    if (context.Request.Path == "/")
+            //    {
+            //        context.Response.Redirect("/swagger");
+            //        return;
+            //    }
+            //    await next.Invoke();
+            //});
             
             var sa = app.ServerFeatures.Get<IServerAddressesFeature>();
             var urls =string.Join(",", sa.Addresses.Select(it => it + "/swagger"));

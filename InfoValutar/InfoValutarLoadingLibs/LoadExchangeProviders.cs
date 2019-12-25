@@ -67,19 +67,27 @@ namespace InfoValutarLoadingLibs
                     loaders.Add(loader);
                 }
             }
-
+            Console.WriteLine(loaders.Count());
             // Create an instance of plugin types
             foreach (var loader in loaders)
             {
-                foreach (var pluginType in loader
-                    .LoadDefaultAssembly()
-                    .GetTypes()
-                    .Where(t => typeof(BankGetExchange).IsAssignableFrom(t) && !t.IsAbstract))
-                {
-                    // This assumes the implementation of IPlugin has a parameterless constructor
-                    var plugin = Activator.CreateInstance(pluginType) as BankGetExchange;
-                    yield return plugin;
+                BankGetExchange plugin=null;
+                try{
+                    foreach (var pluginType in loader
+                        .LoadDefaultAssembly()
+                        .GetTypes()
+                        .Where(t => typeof(BankGetExchange).IsAssignableFrom(t) && !t.IsAbstract))
+                    {
+                        // This assumes the implementation of IPlugin has a parameterless constructor
+                        plugin = Activator.CreateInstance(pluginType) as BankGetExchange;
+                        
+                    }
                 }
+                catch(Exception ex){
+                    Console.WriteLine($"{ex.Message}");
+                    continue;
+                }
+                yield return plugin;
             }
         }
     }

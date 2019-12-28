@@ -1,5 +1,8 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
 // https://github.com/microsoft/vscode-dev-containers/tree/master/containers/alpine-3.10-git
+//docker container prune -f
+//docker images “vs*”
+//docker image rm <id of the prev image>
 {
 	"name": "Infovalutar Angular",
 	"dockerFile": "DockerfileAng",	

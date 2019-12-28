@@ -33,17 +33,30 @@ namespace InfoValutarWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowedAll",
+                builder =>
+                {
+                    builder
+                        .AllowAnyHeader()
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod();
+                });
+
+            });
             services.AddControllers();
-            services.AddSingleton< LoadExchangeProviders>(new LoadExchangeProviders("plugins"));
+            services.AddSingleton<LoadExchangeProviders>(new LoadExchangeProviders("plugins"));
             services.AddSingleton<InMemoryDB>();
-            
+
             services.AddScoped<IRetrieve>(s => new RetrieveSqlServer(s.GetService<InMemoryDB>()));
             services.AddScoped<ISave>(s => new SaveSqlServer(s.GetService<InMemoryDB>()));
             services.AddScoped<LoadAndSaveLastData>();
             services.AddApiVersioning();
-            services.AddOpenApiDocument(c=> {
-                
-                
+            services.AddOpenApiDocument(c =>
+            {
+
+
                 c.PostProcess = d =>
                 {
                     d.Info.Title = "Infovalutar API";
@@ -71,29 +84,30 @@ namespace InfoValutarWebAPI
                 var newUrl = new StringBuilder().Append(req.Scheme + "://").Append(req.Host).Append(req.PathBase).Append("/api/v1.0/rates").Append(req.Path).Append(req.QueryString);
                 var p = "/api/v1.0/rates" + context.Request.Path;
                 await Task.Delay(10);
-                context.Response.Redirect(newUrl.ToString());                
+                context.Response.Redirect(newUrl.ToString());
                 return;
-                
+
             });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowedAll");
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            
+
             app.UseRouting();
 
             app.UseAuthorization();
 
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -122,9 +136,9 @@ namespace InfoValutarWebAPI
             //    }
             //    await next.Invoke();
             //});
-            
+
             var sa = app.ServerFeatures.Get<IServerAddressesFeature>();
-            var urls =string.Join(",", sa.Addresses.Select(it => it + "/swagger"));
+            var urls = string.Join(",", sa.Addresses.Select(it => it + "/swagger"));
             Console.WriteLine("please use " + urls);
 
         }

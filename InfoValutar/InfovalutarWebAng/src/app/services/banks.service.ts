@@ -13,9 +13,9 @@ export class BanksService {
   public GetBanksIds(): Observable<string[]> {
 
 
-    const urlBanks=environment.url +'v1.0/TodayRates/Banks';
+    const urlBanks=environment.url +'api/v1.0/TodayRates/Banks';
     return this.http.get<string[]>(urlBanks);
-    
 
+    
   }
 }

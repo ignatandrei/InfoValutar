@@ -5,9 +5,11 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+
+      <span >Banks
+        <a *ngFor="let it of banks" mat-list-item href="#">{{it}}</a>
+      </span>
+      
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -20,9 +22,15 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>InfovalutarWeb</span>
+      <a href="/">Infovalutar Web</a>
     </mat-toolbar>
 
+    <ul>
+      <li *ngFor="let it of banks">
+         {{it}}
+      </li>
+    </ul>
+    
     <router-outlet></router-outlet>
 
     For Programmers:<br />
@@ -37,4 +45,3 @@
 <a href="https://infovalutar.azurewebsites.net/swagger/index.html"  target="_blank" rel="noopener">Swagger</a>
   </mat-sidenav-content>
 </mat-sidenav-container>
-

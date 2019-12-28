@@ -10,10 +10,13 @@ import { BanksService } from '../services/banks.service';
   styleUrls: ['./banks.component.css']
 })
 export class BanksComponent implements OnInit {
+  banks:string[];
   ngOnInit(): void {
-    this.banks.GetBanksIds().subscribe(
+
+    this.banksService.GetBanksIds().subscribe(
       it=>{
         console.log(it.length);
+        this.banks=it;
       },
       err=> window.alert("error:"+ JSON.stringify(err))
     )
@@ -25,6 +28,6 @@ export class BanksComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private banks: BanksService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private banksService: BanksService) {}
 
 }

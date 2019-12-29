@@ -32,4 +32,6 @@ ARG INSTALL_AZURE_CLI="false"
 ENV DEBIAN_FRONTEND=dialog
 RUN ["dotnet" ,"dev-certs","https", "--clean"]
 RUN ["dotnet","dev-certs","https","-ep","\"/home/vscode/.aspnet/https/aspnetapp.pfx\"","-p","\"SecurePwdGoesHere\""]
-
+#look into the line 		 
+#"-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/workspaces/InfoValutar/InfoValutar/:USERPROFILE/.aspnet/https/aspnetapp.pfx",
+# from devcontainer.json

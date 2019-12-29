@@ -29,7 +29,7 @@
 		// "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
 		 "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:44385",
 		 "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
-		 "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx",
+		 "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/workspaces/InfoValutar/InfoValutar/:USERPROFILE/.aspnet/https/aspnetapp.pfx",
 
 		// [Optional] Override the default HTTP endpoints - need to listen to '*' for appPort to work
 		"-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:8080"
@@ -58,7 +58,7 @@
 		"formulahendry.dotnet-test-explorer"
 	]
 	,
-	"postCreateCommand": "dotnet tool restore && dotnet build",
+	"postCreateCommand": "dotnet tool restore && dotnet build && echo 'dotnet watch --project InfoValutarWebAPI/InfoValutarWebAPI.csproj run'",
 	"overrideCommand":true,
 	"shutdownAction": "stopContainer"
 }

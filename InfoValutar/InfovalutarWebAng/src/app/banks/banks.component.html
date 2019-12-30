@@ -7,7 +7,7 @@
     <mat-nav-list>
 
       <span >Banks
-        <a *ngFor="let it of banks" mat-list-item href="#">{{it}}</a>
+        <a routerLink="bank/{{it}}" *ngFor="let it of banks" mat-list-item href="#">{{it}}</a>
       </span>
       
     </mat-nav-list>
@@ -32,6 +32,7 @@
     </ul>
     
     <router-outlet></router-outlet>
+
 
     For Programmers:<br />
 <a href="https://github.com/ignatandrei/infovalutar" target="_blank" rel="noopener"> Give our repo a star.

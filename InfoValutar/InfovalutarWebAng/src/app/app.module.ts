@@ -13,11 +13,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BankComponent } from './bank/bank.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BanksComponent
+    BanksComponent,
+    BankComponent
   ],
   imports: [
     BrowserModule,

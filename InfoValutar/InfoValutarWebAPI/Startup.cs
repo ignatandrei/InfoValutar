@@ -33,6 +33,10 @@ namespace InfoValutarWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "wwwroot";
+            });
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowedAll",
@@ -107,11 +111,18 @@ namespace InfoValutarWebAPI
 
             app.UseAuthorization();
 
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
 
-            app.UseEndpoints(endpoints =>
+                spa.Options.SourcePath = "ClientApp";
+            });
+
+                app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-
+                
             });
             app.UseOpenApi();
             app.UseSwaggerUi3();

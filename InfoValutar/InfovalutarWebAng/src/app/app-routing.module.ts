@@ -3,15 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BankComponent } from './bank/bank.component';
 import { BanksComponent } from './banks/banks.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
-  {
-   path:'',component:BanksComponent , pathMatch:"full"
-  },
-  {
-    path:'bank/:id',component:BankComponent
-  }
+  
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  {path:'bank/:id',component:BankComponent}
 ];
 
 @NgModule({

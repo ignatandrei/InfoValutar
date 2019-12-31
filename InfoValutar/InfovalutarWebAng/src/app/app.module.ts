@@ -14,12 +14,14 @@ import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BankComponent } from './bank/bank.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BanksComponent,
-    BankComponent
+    BankComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

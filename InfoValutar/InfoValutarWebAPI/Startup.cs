@@ -111,6 +111,9 @@ namespace InfoValutarWebAPI
 
             app.UseAuthorization();
 
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -119,13 +122,11 @@ namespace InfoValutarWebAPI
                 spa.Options.SourcePath = "ClientApp";
             });
 
-                app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 
             });
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
             var service = app.ApplicationServices.GetService<LoadExchangeProviders>();
             foreach (var item in service.Banks())
             {

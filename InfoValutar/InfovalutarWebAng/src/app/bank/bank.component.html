@@ -1,1 +1,9 @@
-<p>You can see here {{idBank}} </p>
+<p>You can see here {{idBank}} </p>th
+For today, number of rates {{rates.length}}
+<ul>
+    <li *ngFor="let rate of rates">
+        {{rate | json}}
+     </li>
+  
+</ul>
+

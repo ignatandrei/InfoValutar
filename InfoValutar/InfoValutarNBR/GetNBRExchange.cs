@@ -30,6 +30,10 @@ namespace InfoValutarNBR
 
         public async Task<IEnumerable<ExchangeRates>> GetActualRates()
         {
+            var b = this as BankGetExchange;
+            if (b.TodayFromCache != null)
+                return b.TodayFromCache;
+
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
             var ret = new List<ExchangeRates>();
             var xml = await httpClient.GetStringAsync("https://www.bnr.ro/nbrfxrates.xml");
@@ -59,6 +63,8 @@ namespace InfoValutarNBR
                 }
                 ret.Add(exch);
             }
+            b.TodayFromCache = ret;
+
             return ret;
 
 

@@ -7,21 +7,25 @@ import { tap, startWith } from 'rxjs/operators';
 
 @Injectable()
 export class CachingInterceptor implements HttpInterceptor {
-  cache: Map<string, any> = new Map<string, any>();
+  static cache: Map<string, any> = new Map<string, any>();
   constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // continue if not cachable.
-    if (this.isCachable(req)) { return next.handle(req); }
+
+    if (!this.isCachable(req)) { return next.handle(req); }
+    console.log(`start intercept ${req.url} ${this.isCachable(req)}`);
     let obsCache: HttpResponse<any> = null;
-    if (this.cache.has(req.url)) {
+    if (CachingInterceptor.cache.has(req.url)) {
         console.log('exists in cache');
-        const cachedResponse = this.cache.get(req.url);
+        const cachedResponse = CachingInterceptor.cache.get(req.url);
         obsCache =  new HttpResponse({ body: cachedResponse });
     }
 
-    let sendDataAndCache$ = this.sendRequestAndCache(req, next);
-    if(obsCache) {
+    const duplicate = req.clone();
+    console.log(`${req.url} exists in cache  ${CachingInterceptor.cache.has(req.url)}  ${obsCache != null}`);
+    let sendDataAndCache$ = this.sendRequestAndCache(duplicate, next);
+    if (obsCache != null) {
        sendDataAndCache$ = sendDataAndCache$.pipe(
            tap(e => {
                console.log('from cache');
@@ -36,12 +40,14 @@ export class CachingInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler,
     ): Observable<HttpEvent<any>> {
-
-    return next.handle(req).pipe(
+      const url = req.url;
+      return next.handle(req).pipe(
       tap(event => {
+        console.log(`in the tap for ${url} ${event instanceof HttpResponse}`);
         // There may be other events besides the response.
         if (event instanceof HttpResponse) {
-          this.cache[req.url] = event.body; // Update the cache.
+          CachingInterceptor.cache.set(url,event.body); // Update the cache.
+          //console.log(`added cache for ${url} with value ${event.body}`);
         }
       })
     );

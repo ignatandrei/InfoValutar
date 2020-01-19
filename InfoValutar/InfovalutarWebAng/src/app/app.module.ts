@@ -16,7 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { BankComponent } from './bank/bank.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgrammerComponent } from './programmer/programmer.component';
-
+import { CachingInterceptor } from 'src/utils/CachingInterceptor';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,11 @@ import { ProgrammerComponent } from './programmer/programmer.component';
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: CachingInterceptor,
+    multi: true
+}, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

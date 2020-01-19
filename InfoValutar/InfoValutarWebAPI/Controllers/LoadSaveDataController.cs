@@ -14,6 +14,7 @@ namespace InfoValutarWebAPI.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/save")]
     [ApiController]
+    [ResponseCache(CacheProfileName = "Default30")]
     public class LoadSaveDataController : ControllerBase
     {
         /// <summary>

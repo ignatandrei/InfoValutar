@@ -33,6 +33,7 @@ namespace InfoValutarWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddResponseCaching();
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "wwwroot";
@@ -49,7 +50,19 @@ namespace InfoValutarWebAPI
                 });
 
             });
-            services.AddControllers();
+            services.AddControllers(c=>
+            {
+                c.CacheProfiles.Add("Default30",
+                    new CacheProfile()
+                    {
+                        Duration = 30
+                    });
+                c.CacheProfiles.Add("Default1Day",
+                    new CacheProfile()
+                    {
+                        Duration = 60*60*24
+                    });
+            });
             services.AddSingleton<LoadExchangeProviders>(new LoadExchangeProviders("plugins"));
             services.AddSingleton<InMemoryDB>();
 
@@ -108,7 +121,7 @@ namespace InfoValutarWebAPI
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseResponseCaching();
             app.UseAuthorization();
 
             app.UseOpenApi();

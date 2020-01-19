@@ -15,6 +15,7 @@ namespace InfoValutarWebAPI.Controllers
     [ApiController]
     [ApiVersion( "1.0" )]
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
+    [ResponseCache(CacheProfileName = "Default30")]
     public class TodayRates : ControllerBase
     {
         private readonly ILogger<TodayRates> _logger;

@@ -30,6 +30,7 @@ namespace InfoValutarWebAPI.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/info")]
+    [ResponseCache(CacheProfileName = "Default1Day")]
     public class InfoController
     {
         /// <summary>

@@ -18,6 +18,7 @@ namespace InfoValutarWebAPI.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/rates")]
     [ApiController]
+    [ResponseCache(CacheProfileName = "Default30")]
     public class FromDBController : ControllerBase
     {
         private readonly IRetrieve retrieve;

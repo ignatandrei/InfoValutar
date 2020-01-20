@@ -3,11 +3,12 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar><a href="/">Menu</a></mat-toolbar>
     <mat-nav-list>
 
       <span >Banks
         <a routerLink="bank/{{it}}" *ngFor="let it of banks" mat-list-item href="#">{{it}}</a>
+        
       </span>
       <span>
         Programmers
@@ -28,15 +29,22 @@
       </button>
       <a href="/">Infovalutar Web</a>
     </mat-toolbar>
-
-    <ul>
-      <li *ngFor="let it of banks">
-         {{it}}
-      </li>
-    </ul>
-    
+    <span>
+      <mat-form-field>
+        <mat-label>Choose bank</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let b of banks" [value]="b">
+            {{b}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      
+      <a routerLink="bank/{{it}}" *ngFor="let it of banks" href="#">{{it}} &nbsp;</a>
+    </span>
+    {{rates.size}} {{rates | json}}
     <router-outlet></router-outlet>
-
+<br />
 
     For Programmers:<br />
 <a href="https://github.com/ignatandrei/infovalutar" target="_blank" rel="noopener"> Give our repo a star.

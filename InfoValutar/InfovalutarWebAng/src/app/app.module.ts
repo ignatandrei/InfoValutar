@@ -18,6 +18,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgrammerComponent } from './programmer/programmer.component';
 import { CachingInterceptor } from 'src/utils/CachingInterceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatSelectModule
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,

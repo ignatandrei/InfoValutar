@@ -30,19 +30,49 @@ namespace InfoValutarNBR
         public string Bank => "BNR";
         public async Task<IEnumerable<ExchangeRates>> GetPreviousRates(DateTime dateTime)
         {
-            //https://www.bnr.ro/files/xml/years/nbrfxrates2020.xml
-            var html = await httpClient.GetStringAsync($"https://www.bnr.ro/files/xml/nbrfxrates{dateTime.Year}.htm");
-            var doc = new HtmlDocument();
-            doc.LoadHtml(html);
-            var table = doc.DocumentNode.SelectNodes("//table").First();
-            var ret = new List<ExchangeRates>();
-            foreach(var item in table.SelectNodes("//thead/tr/th"))
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            var xml = await httpClient.GetStringAsync("https://www.bnr.ro/nbrfxrates.xml");
+            //Console.WriteLine($"{xml}");
+            var serializer = new XmlSerializer(typeof(DataSet));
+            DataSet result;
+            using (var reader = new StringReader(xml))
             {
-                var ex = new ExchangeRates();
-                ex.Bank = Bank;
-                ex.ExchangeTo = "RON";
-                ex.ExchangeTo = item.InnerText;
+                result = serializer.Deserialize(reader) as DataSet;
             }
+            var val = result.Body.Cube.Where(it=>it.date.Subtract(dateTime).TotalDays<1).First();
+            var ret = new List<ExchangeRates>();
+
+            foreach (var item in val.Rate)
+            {
+                var exch = new ExchangeRates
+                {
+                    Bank = this.Bank,
+                    Date = dateTime,
+                    ExchangeTo = "RON",
+                    ExchangeFrom = item.currency,
+                    ExchangeValue = item.Value
+                };
+                if (!string.IsNullOrWhiteSpace(item.multiplier))
+                {
+                    exch.ExchangeValue /= (decimal)int.Parse(item.multiplier);
+                }
+                ret.Add(exch);
+
+            }
+            return ret;
+            //https://www.bnr.ro/files/xml/years/nbrfxrates2020.xml
+            //var html = await httpClient.GetStringAsync($"https://www.bnr.ro/files/xml/nbrfxrates{dateTime.Year}.htm");
+            //var doc = new HtmlDocument();
+            //doc.LoadHtml(html);
+            //var table = doc.DocumentNode.SelectNodes("//table").First();
+            //var ret = new List<ExchangeRates>();
+            //foreach(var item in table.SelectNodes("//thead/tr/th"))
+            //{
+            //    var ex = new ExchangeRates();
+            //    ex.Bank = Bank;
+            //    ex.ExchangeTo = "RON";
+            //    ex.ExchangeTo = item.InnerText;
+            //}
             return null;
 
 
@@ -65,12 +95,12 @@ namespace InfoValutarNBR
             }
             var val = result.Body.Cube.First();
             var date = val.date;
-            string orig = "BNR";
+            
             foreach (var item in val.Rate)
             {
                 var exch = new ExchangeRates
                 {
-                    Bank = orig,
+                    Bank = this.Bank,
                     Date = date,
                     ExchangeTo = "RON",
                     ExchangeFrom = item.currency,

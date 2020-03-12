@@ -1,4 +1,5 @@
-﻿using InfoValutarShared;
+﻿using HtmlAgilityPack;
+using InfoValutarShared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +28,25 @@ namespace InfoValutarNBR
         }
 
         public string Bank => "BNR";
+        public async Task<IEnumerable<ExchangeRates>> GetPreviousRates(DateTime dateTime)
+        {
+            //https://www.bnr.ro/files/xml/years/nbrfxrates2020.xml
+            var html = await httpClient.GetStringAsync($"https://www.bnr.ro/files/xml/nbrfxrates{dateTime.Year}.htm");
+            var doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            var table = doc.DocumentNode.SelectNodes("//table").First();
+            var ret = new List<ExchangeRates>();
+            foreach(var item in table.SelectNodes("//thead/tr/th"))
+            {
+                var ex = new ExchangeRates();
+                ex.Bank = Bank;
+                ex.ExchangeTo = "RON";
+                ex.ExchangeTo = item.InnerText;
+            }
+            return null;
 
+
+        }
         public async Task<IEnumerable<ExchangeRates>> GetActualRates()
         {
             var b = this as BankGetExchange;

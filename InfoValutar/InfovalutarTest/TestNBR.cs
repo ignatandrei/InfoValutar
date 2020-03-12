@@ -26,6 +26,24 @@ namespace InfovalutarTest
             Assert.True(false, "Should find EUR");
         }
         [Fact]
+        [Trait("External", "1")]
+        public async Task TestPrevData()
+        {
+            var date = new DateTime(2020, 03, 11);
+            var nbr = new GetNBRExchange();
+            foreach (var e in await nbr.GetPreviousRates(date))
+            {
+                if (e.ExchangeFrom == "EUR")
+                {
+                    Assert.True(true);
+                    return;
+                }
+            }
+            Assert.True(false, "Should find EUR");
+
+        }
+
+        [Fact]
         [Trait("External", "0")]
         public async Task TestParsing()
         {

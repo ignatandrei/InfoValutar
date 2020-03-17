@@ -61,6 +61,11 @@ namespace InfoValutarNBR
             }
             return ret;
             //https://www.bnr.ro/files/xml/years/nbrfxrates2020.xml
+
+            //                .Where(it => 
+            //it.date.Subtract(dateTime).TotalDays > -1 &&
+            //it.date.Subtract(dateTime).TotalDays < 1)
+
             //var html = await httpClient.GetStringAsync($"https://www.bnr.ro/files/xml/nbrfxrates{dateTime.Year}.htm");
             //var doc = new HtmlDocument();
             //doc.LoadHtml(html);
